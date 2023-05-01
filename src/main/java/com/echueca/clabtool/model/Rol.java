@@ -1,44 +1,37 @@
 package com.echueca.clabtool.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Eduardo Chueca Montaner
  */
 @Entity
+@Table(name = "roles")
 public class Rol {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Getter @Setter private int id;
     
-    private String nombre;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    @Getter @Setter private ERol rol;
 
-    public Rol(int id, String nombre) {
+    public Rol(int id, ERol rol) {
         this.id = id;
-        this.nombre = nombre;
+        this.rol = rol;
     }
 
     public Rol() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 }
