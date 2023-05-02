@@ -24,13 +24,15 @@ public class Estante {
     @Getter @Setter private String nombre;
     @ManyToOne(cascade = CascadeType.ALL)
     @Getter @Setter private Armario armario;
+    @Getter @Setter private String descripcion;
 
     public Estante() {
     }
 
-    public Estante(int id, String nombre, Armario armario) {
+    public Estante(int id, String nombre, Armario armario, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.armario = armario;
+        this.descripcion = descripcion;
     }
 }
