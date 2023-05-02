@@ -1,6 +1,7 @@
 package com.echueca.clabtool.model;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +33,12 @@ public class Solicitud {
     @Getter @Setter private Date fechaSolicitud;
     
     @NotBlank
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @Getter @Setter private Usuario usuarioSolicitud;
     
-    private Date fechaTramite;
+    @Temporal(TemporalType.DATE)
+    @Getter @Setter private Date fechaTramite;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @Getter @Setter private Usuario usuarioTramite;
     
     @Enumerated(EnumType.STRING)
