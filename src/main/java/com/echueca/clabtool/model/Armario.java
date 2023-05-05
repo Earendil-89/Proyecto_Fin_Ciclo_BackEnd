@@ -18,7 +18,7 @@ public class Armario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int id;
+    @Getter @Setter private long id;
     @Getter @Setter private String nombre;
     @Getter @Setter private String descripcion;
 

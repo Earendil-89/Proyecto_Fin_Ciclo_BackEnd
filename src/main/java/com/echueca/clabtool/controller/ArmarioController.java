@@ -36,7 +36,7 @@ public class ArmarioController {
     }
     
     @GetMapping("/armario/{id}")
-    public Optional<Armario> getArmarioById(@PathVariable Integer id) throws JsonProcessingException, IOException { 
+    public Optional<Armario> getArmarioById(@PathVariable Long id) throws JsonProcessingException, IOException { 
         return this.armarioRepository.findById(id);
     }
     
@@ -53,7 +53,7 @@ public class ArmarioController {
     }
     
     @DeleteMapping("/armario/{id}")
-    public ResponseEntity<?> deleteArmarioById(@PathVariable Integer id) throws JsonProcessingException, IOException  {
+    public ResponseEntity<?> deleteArmarioById(@PathVariable Long id) throws JsonProcessingException, IOException  {
         this.armarioRepository.deleteById(id);
         return ResponseEntity.ok("Armario borrado");
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.echueca.clabtool.service;
 
 import com.echueca.clabtool.model.Usuario;
@@ -13,7 +9,6 @@ import org.springframework.http.ResponseEntity;
  * @author Eduardo Chueca Montaner
  */
 public interface IUsuarioService {
-    
     
     public List<Usuario> getUsuario();
     

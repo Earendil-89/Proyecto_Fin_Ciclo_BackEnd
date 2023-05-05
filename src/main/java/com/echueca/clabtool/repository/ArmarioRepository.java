@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Eduardo Chueca Montaner
  */
-public interface ArmarioRepository extends CrudRepository<Armario, Integer> {
+public interface ArmarioRepository extends CrudRepository<Armario, Long> {
     
 }

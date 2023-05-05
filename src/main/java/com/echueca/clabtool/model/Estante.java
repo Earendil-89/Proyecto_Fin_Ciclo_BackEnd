@@ -1,6 +1,5 @@
 package com.echueca.clabtool.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +19,9 @@ public class Estante {
       
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int id;
+    @Getter @Setter private long id;
     @Getter @Setter private String nombre;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @Getter @Setter private Armario armario;
     @Getter @Setter private String descripcion;
 
