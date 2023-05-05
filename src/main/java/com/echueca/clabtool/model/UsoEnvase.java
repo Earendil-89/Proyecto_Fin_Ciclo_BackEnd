@@ -27,10 +27,10 @@ public class UsoEnvase {
     @Getter @Setter private long id;
     
     @NotBlank
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @Getter @Setter private Usuario usuario;
     @NotBlank
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @Getter @Setter private Envase envase;
     
     @Temporal(TemporalType.DATE) @NotBlank

@@ -33,12 +33,12 @@ public class Solicitud {
     @Getter @Setter private Date fechaSolicitud;
     
     @NotBlank
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @Getter @Setter private Usuario usuarioSolicitud;
     
     @Temporal(TemporalType.DATE)
     @Getter @Setter private Date fechaTramite;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @Getter @Setter private Usuario usuarioTramite;
     
     @Enumerated(EnumType.STRING)
