@@ -1,5 +1,6 @@
 package com.echueca.clabtool.model;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

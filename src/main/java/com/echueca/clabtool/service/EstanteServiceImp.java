@@ -54,10 +54,6 @@ public class EstanteServiceImp implements IEstanteService {
     public List<Estante> getEstanteByArmarioId(Long id) {
         Armario a = armarioRepository.findById(id).get();
         
-        if( a == null ) {
-            return null;
-        }
-        
-        return this.estanteRepository.getEstanteByArmario(a);
+        return a == null ? null : this.estanteRepository.getEstanteByArmario(a);
     }
 }
