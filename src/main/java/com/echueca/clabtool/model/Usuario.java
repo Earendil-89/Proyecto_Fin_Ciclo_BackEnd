@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,7 +28,8 @@ import lombok.Setter;
 public class Usuario {
     
     @Id
-    @Getter @Setter private String dni;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter private long id;
     
     @NotBlank
     @Size(max = 20)
@@ -41,14 +44,14 @@ public class Usuario {
     @Size(max = 50)
     @Getter @Setter private String password;
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(	name = "roles_usuarios", 
         joinColumns = @JoinColumn(name = "usuario_id"), 
         inverseJoinColumns = @JoinColumn(name = "rol_id"))
     @Getter @Setter private Set<Rol> roles = new HashSet<>();
 
-    public Usuario(String dni, String nombre, String apellidos, String email, String password) {
-        this.dni = dni;
+    public Usuario(long id, String nombre, String apellidos, String email, String password) {
+        this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;

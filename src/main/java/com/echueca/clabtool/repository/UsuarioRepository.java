@@ -1,12 +1,15 @@
 package com.echueca.clabtool.repository;
 
 import com.echueca.clabtool.model.Usuario;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Eduardo Chueca Montaner
  */
-public interface UsuarioRepository extends CrudRepository<Usuario, String> {
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
+    public Usuario getUsuarioByEmail(String email);
 }

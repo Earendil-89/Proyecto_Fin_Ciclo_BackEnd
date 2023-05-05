@@ -1,10 +1,10 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Usuario;
-import com.echueca.clabtool.repository.UsuarioRepository;
+import com.echueca.clabtool.service.IUsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,33 +27,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
     
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private IUsuarioService usuarioService;
     
     @GetMapping("/usuario")
-    public Iterable<Usuario> getUsuario() throws JsonProcessingException, IOException {
-        return this.usuarioRepository.findAll();
+    public List<Usuario> getUsuario() throws JsonProcessingException, IOException {
+        return this.usuarioService.getUsuario();
     }
     
     @GetMapping("/usuario/{id}")
-    public Optional<Usuario> getUsuarioById(@PathVariable String id) throws JsonProcessingException, IOException { 
-        return this.usuarioRepository.findById(id);
+    public Usuario getUsuarioById(@PathVariable Long id) throws JsonProcessingException, IOException { 
+        return this.usuarioService.getUsuarioById(id);
     }
     
     @PostMapping("/usuario")
     public ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario) throws JsonProcessingException, IOException {
-        this.usuarioRepository.save(usuario);
-        return ResponseEntity.ok("Usuario creado.");
+        return this.usuarioService.saveUsuario(usuario);
     }
     
     @PutMapping("/usuario")
     public ResponseEntity<?> updateUsuario(@RequestBody Usuario usuario) throws JsonProcessingException, IOException {
-        this.usuarioRepository.save(usuario);
-        return ResponseEntity.ok("Usuario actualizado.");
+        return this.usuarioService.updateUsuario(usuario);
     }
     
     @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<?> deleteUsuarioById(@PathVariable String id) throws JsonProcessingException, IOException  {
-        this.usuarioRepository.deleteById(id);
-        return ResponseEntity.ok("Usuario borrado");
+    public ResponseEntity<?> deleteUsuarioById(@PathVariable Long id) throws JsonProcessingException, IOException  {
+        return this.usuarioService.deleteUsuarioById(id);
     }
 }
