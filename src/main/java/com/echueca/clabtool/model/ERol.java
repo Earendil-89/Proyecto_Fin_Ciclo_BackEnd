@@ -7,5 +7,5 @@ package com.echueca.clabtool.model;
 public enum ERol {
     ROL_USUARIO,
     ROL_TECNICO,
-    ROL_ADMIN
+    ROL_ADMINISTRADOR
 }
