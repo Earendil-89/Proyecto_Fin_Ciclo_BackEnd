@@ -1,4 +1,4 @@
-package com.echueca.clabtool.service;
+package com.echueca.clabtool.service.interfaces;
 
 import com.echueca.clabtool.model.Estante;
 import java.util.List;

@@ -4,6 +4,7 @@
  */
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.service.interfaces.IUsuarioService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Usuario;
 import com.echueca.clabtool.repository.UsuarioRepository;

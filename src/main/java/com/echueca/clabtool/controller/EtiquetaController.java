@@ -2,7 +2,7 @@ package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Etiqueta;
 import com.echueca.clabtool.repository.EtiquetaRepository;
-import com.echueca.clabtool.service.IEtiquetaService;
+import com.echueca.clabtool.service.interfaces.IEtiquetaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;

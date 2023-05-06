@@ -1,5 +1,6 @@
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.service.interfaces.ICompuestoService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Compuesto;
 import com.echueca.clabtool.repository.CompuestoRepository;

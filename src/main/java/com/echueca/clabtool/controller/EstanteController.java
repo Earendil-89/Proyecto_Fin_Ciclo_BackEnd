@@ -1,7 +1,7 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Estante;
-import com.echueca.clabtool.service.IEstanteService;
+import com.echueca.clabtool.service.interfaces.IEstanteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;

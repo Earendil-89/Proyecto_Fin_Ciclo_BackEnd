@@ -1,5 +1,6 @@
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.service.interfaces.IEstanteService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Armario;
 import com.echueca.clabtool.model.Estante;

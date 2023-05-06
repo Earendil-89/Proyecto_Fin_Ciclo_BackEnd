@@ -19,7 +19,7 @@ import lombok.Setter;
  * @author Eduardo Chueca Montaner
  */
 @Entity
-@Table(name = "recipientes")
+@Table(name = "envases")
 public class Envase {
     
     @Id

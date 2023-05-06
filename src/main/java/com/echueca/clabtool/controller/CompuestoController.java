@@ -1,7 +1,7 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Compuesto;
-import com.echueca.clabtool.service.ICompuestoService;
+import com.echueca.clabtool.service.interfaces.ICompuestoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;

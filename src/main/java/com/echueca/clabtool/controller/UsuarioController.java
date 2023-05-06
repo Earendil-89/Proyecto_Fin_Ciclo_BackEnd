@@ -1,7 +1,7 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Usuario;
-import com.echueca.clabtool.service.IUsuarioService;
+import com.echueca.clabtool.service.interfaces.IUsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;

@@ -5,7 +5,7 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Frase;
-import com.echueca.clabtool.service.IFraseService;
+import com.echueca.clabtool.service.interfaces.IFraseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;

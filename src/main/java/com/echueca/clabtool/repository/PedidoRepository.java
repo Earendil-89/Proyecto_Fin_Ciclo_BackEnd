@@ -1,12 +1,12 @@
 package com.echueca.clabtool.repository;
 
-import com.echueca.clabtool.model.Envase;
+import com.echueca.clabtool.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Eduardo Chueca Montaner
  */
-public interface EnvaseRepository extends JpaRepository <Envase, Long> {
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     
 }
