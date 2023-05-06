@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Eduardo Chueca Montaner
  */
-public interface FraseRepository extends JpaRepository<Frase, String> {
+public interface FraseRepository extends JpaRepository<Frase, Long> {
     
+    public Frase findByCodigo(String codigo);
 }

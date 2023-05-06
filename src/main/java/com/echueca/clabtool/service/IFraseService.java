@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.echueca.clabtool.service;
+
+import com.echueca.clabtool.model.Frase;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -10,4 +10,13 @@ package com.echueca.clabtool.service;
  */
 public interface IFraseService {
     
+    public List<Frase> getFrase();
+    
+    public Frase getFraseById(Long id);
+    
+    public ResponseEntity<?> saveFrase(Frase frase);
+    
+    public ResponseEntity<?> updateFrase(Frase frase);
+    
+    public ResponseEntity<?> deleteFrase(Long id);
 }
