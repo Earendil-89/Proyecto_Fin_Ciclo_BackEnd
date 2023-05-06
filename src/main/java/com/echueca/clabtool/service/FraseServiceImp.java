@@ -36,6 +36,7 @@ public class FraseServiceImp implements IFraseService {
             this.fraseRepository.save(frase);
             return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase creada."));
         }
+        
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código de la frase ya está en uso."));
     }
 
@@ -43,11 +44,12 @@ public class FraseServiceImp implements IFraseService {
     public ResponseEntity<?> updateFrase(Frase frase) {
         Frase testFrase = this.fraseRepository.findByCodigo(frase.getCodigo());
         
-        if( testFrase == null ) {
-            this.fraseRepository.save(frase);
-            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase creada."));
+        if( testFrase != null && testFrase.getId() != frase.getId() ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código de la frase ya está en uso."));
         }
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código de la frase ya está en uso."));
+        
+        this.fraseRepository.save(frase);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase creada."));
     }
 
     @Override

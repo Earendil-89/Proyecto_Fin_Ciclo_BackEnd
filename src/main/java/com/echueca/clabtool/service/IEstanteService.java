@@ -14,8 +14,6 @@ public interface IEstanteService {
     
     public Estante getEstanteById(Long id);
     
-    public List<Estante> getEstanteByArmarioId(Long id);
-    
     public ResponseEntity<?> saveEstante(Estante estante);
     
     public ResponseEntity<?> updateEstante(Estante estante);

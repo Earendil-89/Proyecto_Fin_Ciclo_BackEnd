@@ -12,11 +12,11 @@ public interface IEtiquetaService {
     
     public List<Etiqueta> getEtiqueta();
     
-    public Etiqueta getEtiquetaById(String id);
+    public Etiqueta getEtiquetaById(Long id);
     
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta);
     
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta);
     
-    public ResponseEntity<?> deleteEtiqueta(String id);
+    public ResponseEntity<?> deleteEtiqueta(Long id);
 }

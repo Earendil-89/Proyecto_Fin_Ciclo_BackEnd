@@ -35,12 +35,24 @@ public class EstanteServiceImp implements IEstanteService {
 
     @Override
     public ResponseEntity<?> saveEstante(Estante estante) {
-        this.estanteRepository.save(estante);
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante creado corréctamente."));
+        Estante testEstante = estanteRepository.findByNombre(estante.getNombre());
+        
+        if( testEstante == null ) {
+            this.estanteRepository.save(estante);
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante creado corréctamente."));
+        }
+        
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El nombre de estante ya está en uso."));
     }
 
     @Override
     public ResponseEntity<?> updateEstante(Estante estante) {
+        Estante testEstante = estanteRepository.findByNombre(estante.getNombre());
+        
+        if( testEstante != null && testEstante.getId() != estante.getId() ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El nombre de estante está en uso."));
+        }
+        
         this.estanteRepository.save(estante);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante actualizado corréctamente."));
     }
@@ -49,11 +61,5 @@ public class EstanteServiceImp implements IEstanteService {
     public ResponseEntity<?> deleteEstanteById(Long id) {
         this.estanteRepository.deleteById(id);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante borrado."));
-    }
-    
-    public List<Estante> getEstanteByArmarioId(Long id) {
-        Armario a = armarioRepository.findById(id).get();
-        
-        return a == null ? null : this.estanteRepository.getEstanteByArmario(a);
     }
 }

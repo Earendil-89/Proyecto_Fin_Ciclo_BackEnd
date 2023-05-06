@@ -12,11 +12,11 @@ public interface ICompuestoService {
     
     public List<Compuesto> getCompuesto();
     
-    public Compuesto getCompuestoById(String id);
+    public Compuesto getCompuestoById(Long id);
     
     public ResponseEntity<?> saveCompuesto(Compuesto compuesto);
     
     public ResponseEntity<?> updateCompuesto(Compuesto compuesto);
     
-    public ResponseEntity<?> deleteCompuesto(String id);
+    public ResponseEntity<?> deleteCompuesto(Long id);
 }

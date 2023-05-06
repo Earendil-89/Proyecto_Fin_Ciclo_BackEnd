@@ -1,12 +1,12 @@
 package com.echueca.clabtool.repository;
 
 import com.echueca.clabtool.model.Armario;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Eduardo Chueca Montaner
  */
-public interface ArmarioRepository extends CrudRepository<Armario, Long> {
+public interface ArmarioRepository extends JpaRepository<Armario, Long> {
     
 }

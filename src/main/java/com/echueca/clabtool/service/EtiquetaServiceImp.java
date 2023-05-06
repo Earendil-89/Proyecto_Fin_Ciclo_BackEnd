@@ -24,34 +24,38 @@ public class EtiquetaServiceImp implements IEtiquetaService {
     }
 
     @Override
-    public Etiqueta getEtiquetaById(String id) {
+    public Etiqueta getEtiquetaById(Long id) {
         return this.etiquetaRepository.findById(id).get();
     }
 
     @Override
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta) {
-        Etiqueta testEtiqueta = this.etiquetaRepository.findById(etiqueta.getCodigo()).get();
+        Etiqueta testEtiqueta = this.etiquetaRepository.findById(etiqueta.getId()).get();
         
         if( testEtiqueta == null ) {
             this.etiquetaRepository.save(etiqueta);
-            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada"));
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada."));
         }
+        
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo de la etiqueta ya existe."));
     }
 
     @Override
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta) {
-        this.etiquetaRepository.save(etiqueta);
+        Etiqueta testEtiqueta = this.etiquetaRepository.findById(etiqueta.getId()).get();
         
+        if( testEtiqueta != null && testEtiqueta.getId() != etiqueta.getId() ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo está en uso por otra etiqueta."));
+        }
+
+        this.etiquetaRepository.save(etiqueta);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta actualizada."));
     }
 
     @Override
-    public ResponseEntity<?> deleteEtiqueta(String id) {
+    public ResponseEntity<?> deleteEtiqueta(Long id) {
         this.etiquetaRepository.deleteById(id);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta eliminada."));
     }
-    
-    
 }

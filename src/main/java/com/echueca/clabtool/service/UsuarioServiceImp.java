@@ -9,7 +9,6 @@ import com.echueca.clabtool.model.Usuario;
 import com.echueca.clabtool.repository.UsuarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,7 @@ public class UsuarioServiceImp implements IUsuarioService {
     
     @Override
     public ResponseEntity<?> saveUsuario(Usuario usuario) {
-        Usuario userTest = this.usuarioRepository.getUsuarioByEmail(usuario.getEmail());
+        Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
         if( userTest != null )
                 return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
         
@@ -45,7 +44,7 @@ public class UsuarioServiceImp implements IUsuarioService {
     
     @Override
     public ResponseEntity<?> updateUsuario(Usuario usuario) {
-        Usuario userTest = this.usuarioRepository.getUsuarioByEmail(usuario.getEmail());
+        Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
         if( userTest != null && userTest.getId() != usuario.getId() )  {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
         }

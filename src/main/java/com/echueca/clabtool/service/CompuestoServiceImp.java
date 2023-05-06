@@ -24,13 +24,13 @@ public class CompuestoServiceImp implements ICompuestoService {
     }
 
     @Override
-    public Compuesto getCompuestoById(String id) {
+    public Compuesto getCompuestoById(Long id) {
         return this.compuestoRepository.findById(id).get();
     }
 
     @Override
     public ResponseEntity<?> saveCompuesto(Compuesto compuesto) {
-        Compuesto testCompuesto = this.compuestoRepository.findById(compuesto.getCas()).get();
+        Compuesto testCompuesto = this.compuestoRepository.findById(compuesto.getId()).get();
         
         if( testCompuesto == null ) {
             this.compuestoRepository.save(compuesto);
@@ -41,17 +41,19 @@ public class CompuestoServiceImp implements ICompuestoService {
 
     @Override
     public ResponseEntity<?> updateCompuesto(Compuesto compuesto) {
-        this.compuestoRepository.save(compuesto);
+        Compuesto testCompuesto = this.compuestoRepository.findById(compuesto.getId()).get();
         
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Compuesto químico actualizado."));
+        if( testCompuesto == null || testCompuesto.getId() == compuesto.getId()) {
+            this.compuestoRepository.save(compuesto);
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Compuesto químico actualizado."));
+        }
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El número CAS está en uso por otro compuesto."));
     }
 
     @Override
-    public ResponseEntity<?> deleteCompuesto(String id) {
+    public ResponseEntity<?> deleteCompuesto(Long id) {
         this.compuestoRepository.deleteById(id);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Compuesto químico borrado."));
     }
-    
-    
 }

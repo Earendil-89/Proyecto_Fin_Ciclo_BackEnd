@@ -2,6 +2,7 @@ package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Etiqueta;
 import com.echueca.clabtool.repository.EtiquetaRepository;
+import com.echueca.clabtool.service.IEtiquetaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;
@@ -27,36 +28,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class EtiquetaController {
     
     @Autowired
-    private EtiquetaRepository etiquetaRepository;
+    private IEtiquetaService etiquetaService;
     
     @GetMapping("/etiqueta")
     public List<Etiqueta> getEtiqueta() throws JsonProcessingException, IOException {
-        return this.etiquetaRepository.findAll();
+        return this.etiquetaService.getEtiqueta();
     }
     
     @GetMapping("/etiqueta/{id}")
-    public Etiqueta getEtiquetaById(@PathVariable String id) throws JsonProcessingException, IOException {
-        return this.etiquetaRepository.findById(id).get();
+    public Etiqueta getEtiquetaById(@PathVariable Long id) throws JsonProcessingException, IOException {
+        return this.etiquetaService.getEtiquetaById(id);
     }
     
     @PostMapping("/etiqueta")
     public ResponseEntity<?> saveEtiqueta(@RequestBody Etiqueta etiqueta) throws JsonProcessingException, IOException {
-        etiquetaRepository.save(etiqueta);
-        
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada."));
+        return this.etiquetaService.saveEtiqueta(etiqueta);
     }
     
     @PutMapping("/etiqueta")
     public ResponseEntity<?> updateEtiqueta(@RequestBody Etiqueta etiqueta) throws JsonProcessingException, IOException {
-        etiquetaRepository.save(etiqueta);
-        
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta actualizada."));
+        return this.etiquetaService.updateEtiqueta(etiqueta);
     }
     
     @DeleteMapping("/etiqueta/{id}")
-    public ResponseEntity<?> deleteEtiqueta(@PathVariable String id) throws JsonProcessingException, IOException {
-        etiquetaRepository.deleteById(id);
-        
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta borrada"));
+    public ResponseEntity<?> deleteEtiqueta(@PathVariable Long id) throws JsonProcessingException, IOException {
+        return this.etiquetaService.deleteEtiqueta(id);
     }
 }

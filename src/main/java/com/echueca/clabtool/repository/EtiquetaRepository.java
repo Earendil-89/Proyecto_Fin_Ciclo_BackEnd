@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Eduardo Chueca Montaner
  */
-public interface EtiquetaRepository extends JpaRepository<Etiqueta, String> {
+public interface EtiquetaRepository extends JpaRepository<Etiqueta, Long> {
     
 }
