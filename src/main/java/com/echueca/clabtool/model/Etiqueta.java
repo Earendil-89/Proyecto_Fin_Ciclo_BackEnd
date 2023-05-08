@@ -23,6 +23,7 @@ public class Etiqueta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
+    
     @Getter @Setter private String codigo;
     @Getter @Setter private String descripcion;
     @Getter @Setter private String imgUrl;
