@@ -5,6 +5,7 @@ import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Etiqueta;
 import com.echueca.clabtool.repository.EtiquetaRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class EtiquetaServiceImp implements IEtiquetaService {
 
     @Override
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta) {
-        Etiqueta testEtiqueta = this.etiquetaRepository.findById(etiqueta.getId()).get();
-        
+        Optional<Etiqueta> testOptional = this.etiquetaRepository.findById(etiqueta.getId());
+        Etiqueta testEtiqueta = testOptional.isPresent() ? testOptional.get() : null;
         if( testEtiqueta == null ) {
             this.etiquetaRepository.save(etiqueta);
             return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada."));
@@ -43,7 +44,8 @@ public class EtiquetaServiceImp implements IEtiquetaService {
 
     @Override
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta) {
-        Etiqueta testEtiqueta = this.etiquetaRepository.findById(etiqueta.getId()).get();
+        Optional<Etiqueta> testOptional = this.etiquetaRepository.findById(etiqueta.getId());
+        Etiqueta testEtiqueta = testOptional.isPresent() ? testOptional.get() : null;
         
         if( testEtiqueta != null && testEtiqueta.getId() != etiqueta.getId() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo está en uso por otra etiqueta."));
