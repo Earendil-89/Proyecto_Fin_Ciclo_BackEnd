@@ -5,6 +5,7 @@ import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Compuesto;
 import com.echueca.clabtool.repository.CompuestoRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ public class CompuestoServiceImp implements ICompuestoService {
 
     @Override
     public ResponseEntity<?> saveCompuesto(Compuesto compuesto) {
-        Compuesto testCompuesto = this.compuestoRepository.findById(compuesto.getId()).get();
+        Optional<Compuesto> testOptional = this.compuestoRepository.findById(compuesto.getId());
+        Compuesto testCompuesto = testOptional.isPresent() ? testOptional.get() : null;
         
         if( testCompuesto == null ) {
             this.compuestoRepository.save(compuesto);
@@ -42,13 +44,14 @@ public class CompuestoServiceImp implements ICompuestoService {
 
     @Override
     public ResponseEntity<?> updateCompuesto(Compuesto compuesto) {
-        Compuesto testCompuesto = this.compuestoRepository.findById(compuesto.getId()).get();
+        Optional<Compuesto> testOptional = this.compuestoRepository.findById(compuesto.getId());
+        Compuesto testCompuesto = testOptional.isPresent() ? testOptional.get() : null;
         
-        if( testCompuesto == null || testCompuesto.getId() == compuesto.getId()) {
-            this.compuestoRepository.save(compuesto);
-            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Compuesto químico actualizado."));
+        if( testCompuesto != null && testCompuesto.getId() != compuesto.getId()) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El número CAS está en uso por otro compuesto."));
         }
-        return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El número CAS está en uso por otro compuesto."));
+        this.compuestoRepository.save(compuesto);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Compuesto químico actualizado."));
     }
 
     @Override
