@@ -38,6 +38,11 @@ public class EstanteController {
         return this.estanteService.getEstanteById(id);
     }
     
+    @GetMapping("/estante?armarioId={id}")
+    public List<Estante> getEstanteByArmarioId(@PathVariable Long id) throws JsonProcessingException, IOException {
+        return this.estanteService.getEstanteByArmarioId(id);
+    }
+    
     @PostMapping("/estante")
     public ResponseEntity<?> saveEstante(@RequestBody Estante estante) throws JsonProcessingException, IOException {
         return this.estanteService.saveEstante(estante);

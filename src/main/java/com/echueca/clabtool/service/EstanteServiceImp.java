@@ -33,6 +33,13 @@ public class EstanteServiceImp implements IEstanteService {
     public Estante getEstanteById(Long id) {
         return this.estanteRepository.findById(id).get();
     }
+    
+    @Override
+    public List<Estante> getEstanteByArmarioId(Long id) {
+        Armario armario = this.armarioRepository.findById(id).get();
+        
+        return this.estanteRepository.findByArmario(armario);
+    }
 
     @Override
     public ResponseEntity<?> saveEstante(Estante estante) {
@@ -53,14 +60,15 @@ public class EstanteServiceImp implements IEstanteService {
         if( testEstante != null && testEstante.getId() != estante.getId() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El nombre de estante está en uso."));
         }
-        
         this.estanteRepository.save(estante);
+        
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante actualizado corréctamente."));
     }
 
     @Override
     public ResponseEntity<?> deleteEstanteById(Long id) {
         this.estanteRepository.deleteById(id);
+        
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante borrado."));
     }
 }
