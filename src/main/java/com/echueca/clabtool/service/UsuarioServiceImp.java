@@ -36,8 +36,9 @@ public class UsuarioServiceImp implements IUsuarioService {
     @Override
     public ResponseEntity<?> saveUsuario(Usuario usuario) {
         Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
-        if( userTest != null )
+        if( userTest != null ) {
                 return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
+        }
         
         this.usuarioRepository.save(usuario);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Usuario creado."));

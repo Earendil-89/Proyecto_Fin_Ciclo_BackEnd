@@ -32,8 +32,7 @@ public class CompuestoServiceImp implements ICompuestoService {
 
     @Override
     public ResponseEntity<?> saveCompuesto(Compuesto compuesto) {
-        Optional<Compuesto> testOptional = this.compuestoRepository.findById(compuesto.getId());
-        Compuesto testCompuesto = testOptional.isPresent() ? testOptional.get() : null;
+        Compuesto testCompuesto = this.compuestoRepository.findByCas(compuesto.getCas());
         
         if( testCompuesto == null ) {
             this.compuestoRepository.save(compuesto);
@@ -44,10 +43,9 @@ public class CompuestoServiceImp implements ICompuestoService {
 
     @Override
     public ResponseEntity<?> updateCompuesto(Compuesto compuesto) {
-        Optional<Compuesto> testOptional = this.compuestoRepository.findById(compuesto.getId());
-        Compuesto testCompuesto = testOptional.isPresent() ? testOptional.get() : null;
+        Compuesto testCompuesto = this.compuestoRepository.findByCas(compuesto.getCas());
         
-        if( testCompuesto != null && testCompuesto.getId() != compuesto.getId()) {
+        if( testCompuesto != null && testCompuesto.getId() != compuesto.getId() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El número CAS está en uso por otro compuesto."));
         }
         this.compuestoRepository.save(compuesto);

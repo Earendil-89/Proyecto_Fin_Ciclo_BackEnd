@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CompuestoRepository extends JpaRepository<Compuesto, Long> {
     
+    public Compuesto findByCas(String cas);
 }
