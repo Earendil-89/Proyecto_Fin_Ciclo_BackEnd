@@ -25,7 +25,7 @@ public class Armario {
     public Armario() {
     }
 
-    public Armario(int id, String nombre, String descripcion) {
+    public Armario(long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;

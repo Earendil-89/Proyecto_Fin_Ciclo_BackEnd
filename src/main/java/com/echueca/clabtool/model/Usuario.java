@@ -32,16 +32,16 @@ public class Usuario {
     @Getter @Setter private long id;
     
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 30)
     @Getter @Setter private String nombre;
     @NotBlank
-    @Size(max = 30)
+    @Size(max = 50)
     @Getter @Setter private String apellidos;
     @NotBlank
     @Size(max = 30)
     @Getter @Setter private String email;
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     @Getter @Setter private String password;
     
     @ManyToMany

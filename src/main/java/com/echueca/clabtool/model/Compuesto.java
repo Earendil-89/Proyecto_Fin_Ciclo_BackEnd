@@ -28,8 +28,6 @@ public class Compuesto {
     
     @NotBlank
     @Getter @Setter private String nombre;
-    
-    @Getter @Setter private String nombreSecundario;
     @Getter @Setter private String formula;
     @Getter @Setter private double pesoMolecular;
     @Getter @Setter private String imgUrl;
@@ -41,7 +39,6 @@ public class Compuesto {
         this.id = id;
         this.cas = cas;
         this.nombre = nombre;
-        this.nombreSecundario = nombreSecundario;
         this.formula = formula;
         this.pesoMolecular = pesoMolecular;
         this.imgUrl = imgUrl;

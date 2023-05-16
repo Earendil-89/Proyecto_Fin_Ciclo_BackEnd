@@ -1,6 +1,5 @@
 package com.echueca.clabtool.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,16 +24,24 @@ public class Envase {
     @Getter @Setter private double cantidad;
     @Getter @Setter private boolean disponible;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @Getter @Setter Estante estante;
+    
+    @ManyToOne
+    @Getter @Setter EnvaseProp propiedades;
+    
+    @ManyToOne
+    @Getter @Setter Pedido pedido;
 
     public Envase() {
     }
 
-    public Envase(long id, double cantidad, boolean disponible, Estante estante) {
+    public Envase(long id, double cantidad, boolean disponible, Estante estante, EnvaseProp propiedades, Pedido pedido) {
         this.id = id;
         this.cantidad = cantidad;
         this.disponible = disponible;
         this.estante = estante;
+        this.propiedades = propiedades;
+        this.pedido = pedido;
     }
 }

@@ -29,7 +29,7 @@ public class Estante {
     public Estante() {
     }
 
-    public Estante(int id, String nombre, String descripcion, Armario armario) {
+    public Estante(long id, String nombre, String descripcion, Armario armario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
