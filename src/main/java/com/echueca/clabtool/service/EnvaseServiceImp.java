@@ -5,6 +5,7 @@ import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Envase;
 import com.echueca.clabtool.repository.EnvaseRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EnvaseServiceImp implements IEnvaseService {
     
+    @Autowired
     private EnvaseRepository envaseRepository;
 
     @Override
