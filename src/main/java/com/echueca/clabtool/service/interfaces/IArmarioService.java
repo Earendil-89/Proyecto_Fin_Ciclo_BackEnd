@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.echueca.clabtool.service.interfaces;
+
+import com.echueca.clabtool.model.Armario;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -10,4 +10,13 @@ package com.echueca.clabtool.service.interfaces;
  */
 public interface IArmarioService {
     
+    public List<Armario> getArmario();
+    
+    public Armario getArmarioById(Long id);
+    
+    public ResponseEntity<?> saveArmario(Armario armario);
+    
+    public ResponseEntity<?> updateArmario(Armario armario);
+    
+    public ResponseEntity<?> deleteArmario(Long id);
 }

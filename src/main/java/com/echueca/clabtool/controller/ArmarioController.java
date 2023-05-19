@@ -1,11 +1,9 @@
 package com.echueca.clabtool.controller;
 
 import com.echueca.clabtool.model.Armario;
-import com.echueca.clabtool.model.Usuario;
-import com.echueca.clabtool.repository.ArmarioRepository;
+import com.echueca.clabtool.service.interfaces.IArmarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,33 +26,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArmarioController {
     
     @Autowired
-    private ArmarioRepository armarioRepository;
+    private IArmarioService armarioService;
     
     @GetMapping("/armario")
     public Iterable<Armario> getArmario() throws JsonProcessingException, IOException {
-        return this.armarioRepository.findAll();
+        return this.armarioService.getArmario();
     }
     
     @GetMapping("/armario/{id}")
-    public Optional<Armario> getArmarioById(@PathVariable Long id) throws JsonProcessingException, IOException { 
-        return this.armarioRepository.findById(id);
+    public Armario getArmarioById(@PathVariable Long id) throws JsonProcessingException, IOException { 
+        return this.armarioService.getArmarioById(id);
     }
     
     @PostMapping("/armario")
     public ResponseEntity<?> saveArmario(@RequestBody Armario armario) throws JsonProcessingException, IOException {
-        this.armarioRepository.save(armario);
-        return ResponseEntity.ok("Armario creado.");
+        return this.armarioService.saveArmario(armario);
     }
     
     @PutMapping("/armario")
     public ResponseEntity<?> updateArmario(@RequestBody Armario armario) throws JsonProcessingException, IOException {
-        this.armarioRepository.save(armario);
-        return ResponseEntity.ok("Armario actualizado.");
+        return this.armarioService.updateArmario(armario);
     }
     
     @DeleteMapping("/armario/{id}")
     public ResponseEntity<?> deleteArmarioById(@PathVariable Long id) throws JsonProcessingException, IOException  {
-        this.armarioRepository.deleteById(id);
-        return ResponseEntity.ok("Armario borrado");
+        return this.armarioService.deleteArmario(id);
     }
 }
