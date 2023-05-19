@@ -32,11 +32,11 @@ public class EtiquetaServiceImp implements IEtiquetaService {
 
     @Override
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta) {
-        Optional<Etiqueta> testOptional = this.etiquetaRepository.findById(etiqueta.getId());
-        Etiqueta testEtiqueta = testOptional.isPresent() ? testOptional.get() : null;
-        if( testEtiqueta == null ) {
+        Etiqueta testEntity = this.etiquetaRepository.findByCodigo(etiqueta.getCodigo());
+        
+        if( testEntity == null ) {
             this.etiquetaRepository.save(etiqueta);
-            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada."));
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta creada."));          
         }
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo de la etiqueta ya existe."));
@@ -44,10 +44,9 @@ public class EtiquetaServiceImp implements IEtiquetaService {
 
     @Override
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta) {
-        Optional<Etiqueta> testOptional = this.etiquetaRepository.findById(etiqueta.getId());
-        Etiqueta testEtiqueta = testOptional.isPresent() ? testOptional.get() : null;
+        Etiqueta testEntity = this.etiquetaRepository.findByCodigo(etiqueta.getCodigo());
         
-        if( testEtiqueta != null && testEtiqueta.getId() != etiqueta.getId() ) {
+        if( testEntity != null && testEntity.getId() != etiqueta.getId() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo está en uso por otra etiqueta."));
         }
 
