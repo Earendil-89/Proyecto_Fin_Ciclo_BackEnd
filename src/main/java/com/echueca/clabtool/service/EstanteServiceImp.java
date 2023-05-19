@@ -66,7 +66,7 @@ public class EstanteServiceImp implements IEstanteService {
     }
 
     @Override
-    public ResponseEntity<?> deleteEstanteById(Long id) {
+    public ResponseEntity<?> deleteEstante(Long id) {
         this.estanteRepository.deleteById(id);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante borrado."));

@@ -20,5 +20,5 @@ public interface IEstanteService {
     
     public ResponseEntity<?> updateEstante(Estante estante);
     
-    public ResponseEntity<?> deleteEstanteById(Long id);
+    public ResponseEntity<?> deleteEstante(Long id);
 }
