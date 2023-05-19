@@ -32,8 +32,6 @@ public class EnvaseProp {
     @Getter @Setter private String nombre;
     @Getter @Setter private double pureza;
     @Getter @Setter private double capacidad;
-    @Enumerated(EnumType.STRING)
-    @Getter @Setter private Unidad unidades;
     
     @ManyToOne
     @Getter @Setter private Compuesto compuesto;
@@ -50,6 +48,9 @@ public class EnvaseProp {
         inverseJoinColumns = @JoinColumn(name = "etiqueta_id"))
     @Getter @Setter private Set<Etiqueta> etiquetas;
     @Getter @Setter private String urlFabricante;
+    
+    @ManyToOne
+    @Getter @Setter private Unidad unidades;
 
     public EnvaseProp() {
     }
