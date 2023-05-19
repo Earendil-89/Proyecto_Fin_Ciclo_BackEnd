@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface EnvasePropRepository extends JpaRepository<EnvaseProp, Long> {
     
+    public EnvaseProp findByCodigo(String codigo);
 }

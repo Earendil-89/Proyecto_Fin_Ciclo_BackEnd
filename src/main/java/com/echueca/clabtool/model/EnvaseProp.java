@@ -1,7 +1,10 @@
 package com.echueca.clabtool.model;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +32,7 @@ public class EnvaseProp {
     @Getter @Setter private String nombre;
     @Getter @Setter private double pureza;
     @Getter @Setter private double capacidad;
+    @Enumerated(EnumType.STRING)
     @Getter @Setter private Unidad unidades;
     
     @ManyToOne
@@ -45,11 +49,12 @@ public class EnvaseProp {
         joinColumns = @JoinColumn(name = "envase_id"), 
         inverseJoinColumns = @JoinColumn(name = "etiqueta_id"))
     @Getter @Setter private Set<Etiqueta> etiquetas;
+    @Getter @Setter private String urlFabricante;
 
     public EnvaseProp() {
     }
 
-    public EnvaseProp(long id, String codigo, String nombre, double pureza, double capacidad, Unidad unidades, Compuesto compuesto, Set<Frase> frases, Set<Etiqueta> etiquetas) {
+    public EnvaseProp(long id, String codigo, String nombre, double pureza, double capacidad, Unidad unidades, Compuesto compuesto, Set<Frase> frases, Set<Etiqueta> etiquetas, String urlFabricante) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -59,5 +64,6 @@ public class EnvaseProp {
         this.compuesto = compuesto;
         this.frases = frases;
         this.etiquetas = etiquetas;
+        this.urlFabricante = urlFabricante;
     }
 }

@@ -28,22 +28,22 @@ public class EnvasePropController {
     private IEnvasePropService envasePropService;
     
     @GetMapping("/envaseProp")
-    public List<EnvaseProp> getEnvase() {
+    public List<EnvaseProp> getEnvaseProp() {
         return this.envasePropService.getEnvaseProp();
     }
     
     @PostMapping("/envaseProp")
-    public ResponseEntity<?> saveEnvase(@RequestBody EnvaseProp envaseProp) {
+    public ResponseEntity<?> saveEnvaseProp(@RequestBody EnvaseProp envaseProp) {
         return this.envasePropService.saveEnvaseProp(envaseProp);
     }
     
     @PutMapping("/envaseProp")
-    public ResponseEntity<?> updateEnvase(@RequestBody EnvaseProp envaseProp) {
+    public ResponseEntity<?> updateEnvaseProp(@RequestBody EnvaseProp envaseProp) {
         return this.envasePropService.updateEnvaseProp(envaseProp);
     }
     
-    @DeleteMapping("/envaseProp")
-    public ResponseEntity<?> deleteEnvase(@PathVariable Long id) {
+    @DeleteMapping("/envaseProp/{id}")
+    public ResponseEntity<?> deleteEnvaseProp(@PathVariable Long id) {
         return this.envasePropService.deleteEnvaseProp(id);
     }
 }

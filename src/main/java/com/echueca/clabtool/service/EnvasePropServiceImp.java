@@ -1,5 +1,6 @@
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.EnvaseProp;
 import com.echueca.clabtool.repository.EnvasePropRepository;
 import org.springframework.stereotype.Service;
@@ -32,16 +33,27 @@ public class EnvasePropServiceImp implements IEnvasePropService {
 
     @Override
     public ResponseEntity<?> saveEnvaseProp(EnvaseProp envaseProp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EnvaseProp testEntity = this.envasePropRepository.findByCodigo(envaseProp.getCodigo());
+        if( testEntity == null ) {
+            this.envasePropRepository.save(envaseProp);
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Datos de envase creados"));
+        }
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código especificado ya existe"));
     }
 
     @Override
     public ResponseEntity<?> updateEnvaseProp(EnvaseProp envaseProp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EnvaseProp testEntity = this.envasePropRepository.findByCodigo(envaseProp.getCodigo());
+        if( testEntity != null && testEntity.getId() != envaseProp.getId() ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código especificado ya está en uso"));
+        }
+        this.envasePropRepository.save(envaseProp);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Datos de envase actualizados"));
     }
 
     @Override
     public ResponseEntity<?> deleteEnvaseProp(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.envasePropRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Datos de envase borrados"));
     }
 }
