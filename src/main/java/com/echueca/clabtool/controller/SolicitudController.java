@@ -32,9 +32,24 @@ public class SolicitudController {
         return this.solicitudService.getSolicitud();
     }
     
+    @GetMapping("/solicitud?activa=true")
+    public List<Solicitud> getActiveSolicitud() {
+        return this.solicitudService.getActiveSolicitud();
+    }
+    
+    @GetMapping("/solicitud?activa=false")
+    public List<Solicitud> getInactiveSolicitud() {
+        return this.solicitudService.getInactiveSolicitud();
+    }
+    
     @GetMapping("/solicitud/{id}")
     public Solicitud getSolicitudById(@PathVariable Long id) {
         return this.solicitudService.getSolicitudById(id);
+    }
+    
+    @GetMapping("/usuario/{userId}/solicitud")
+    public List<Solicitud> getSolicitudByUsuarioId(@PathVariable Long userId) {
+        return this.solicitudService.getSolicitudByUsuarioId(userId);
     }
     
     @PostMapping("/solicitud")

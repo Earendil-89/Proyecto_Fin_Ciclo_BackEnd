@@ -12,6 +12,12 @@ public interface ISolicitudService {
     
     public List<Solicitud> getSolicitud();
     
+    public List<Solicitud> getActiveSolicitud();
+    
+    public List<Solicitud> getInactiveSolicitud();
+    
+    public List<Solicitud> getSolicitudByUsuarioId(Long id);
+    
     public Solicitud getSolicitudById(Long id);
     
     public ResponseEntity<?> saveSolicitud(Solicitud solicitud);

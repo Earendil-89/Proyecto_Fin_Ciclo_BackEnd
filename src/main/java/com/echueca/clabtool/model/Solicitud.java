@@ -1,7 +1,6 @@
 package com.echueca.clabtool.model;
 
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,6 +29,7 @@ public class Solicitud {
     @Getter @Setter private long id;
     
     @NotBlank
+    @Temporal(TemporalType.DATE)
     @Getter @Setter private Date fechaSolicitud;
     
     @NotBlank
@@ -45,11 +45,11 @@ public class Solicitud {
     @Column(length = 20)
     @Getter @Setter private EstadoSolicitud estado;
     
-    @Column(length = 200)
+    @Column(length = 400) 
     @Getter @Setter private String descripcion;
     
     @NotBlank
-    @Getter @Setter private String idRecipiente;
+    @Getter @Setter private String codigoRecipiente;
     
     @Getter @Setter private String link;
 
@@ -64,7 +64,7 @@ public class Solicitud {
         this.usuarioTramite = usuarioTramite;
         this.estado = estado;
         this.descripcion = descripcion;
-        this.idRecipiente = idRecipiente;
+        this.codigoRecipiente = codigoRecipiente;
         this.link = link;
     }
 }

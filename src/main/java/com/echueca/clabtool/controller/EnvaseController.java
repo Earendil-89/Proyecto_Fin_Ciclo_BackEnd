@@ -5,6 +5,7 @@ import com.echueca.clabtool.service.interfaces.IEnvaseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +27,12 @@ public class EnvaseController {
     @Autowired
     private IEnvaseService envaseService;
     
-    @GetMapping("/envase")
+    @GetMapping("/manager/envase")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Envase> getEnvase() {
         return this.envaseService.getEnvase();
     }
+    
     
     @PostMapping("/envase")
     public ResponseEntity<?> saveEnvase(@RequestBody Envase envase) {

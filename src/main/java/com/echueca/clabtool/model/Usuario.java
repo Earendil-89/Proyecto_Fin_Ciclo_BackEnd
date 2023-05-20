@@ -3,7 +3,6 @@ package com.echueca.clabtool.model;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +28,7 @@ public class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private long id;
+    @Getter @Setter private long id;                // Clave principal
     
     @NotBlank
     @Size(max = 30)
@@ -39,23 +38,17 @@ public class Usuario {
     @Getter @Setter private String apellidos;
     @NotBlank
     @Size(max = 30)
-    @Getter @Setter private String email;
+    @Getter @Setter private String nombreUsuario;
     @NotBlank
-    @Size(max = 100)
-    @Getter @Setter private String password;
-    
-    @ManyToMany
-    @JoinTable(	name = "roles_usuarios", 
-        joinColumns = @JoinColumn(name = "usuario_id"), 
-        inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    @Getter @Setter private Set<Rol> roles = new HashSet<>();
+    @Size(max = 30)
+    @Getter @Setter private String email;
 
-    public Usuario(long id, String nombre, String apellidos, String email, String password) {
+    public Usuario(long id, String nombre, String apellidos, String nombreUsuario, String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.nombreUsuario = nombreUsuario;
         this.email = email;
-        this.password = password;
     }
 
     public Usuario() {
