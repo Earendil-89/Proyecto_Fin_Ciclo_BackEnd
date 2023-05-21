@@ -1,6 +1,8 @@
 package com.echueca.clabtool.service.interfaces;
 
+import com.echueca.clabtool.DTO.SolicitudDTO;
 import com.echueca.clabtool.model.Solicitud;
+import com.echueca.clabtool.model.Usuario;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 
@@ -11,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 public interface ISolicitudService {
     
     public List<Solicitud> getSolicitud();
+    
+    public List<Solicitud> getSolicitudByNombreUsuario(String nombreusuario);
     
     public List<Solicitud> getActiveSolicitud();
     
@@ -23,6 +27,10 @@ public interface ISolicitudService {
     public ResponseEntity<?> saveSolicitud(Solicitud solicitud);
     
     public ResponseEntity<?> updateSolicitud(Solicitud solicitud);
+    
+    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario);
+    
+    public ResponseEntity<?> updateSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario);
     
     public ResponseEntity<?> deleteSolicitud(Long id);
 }

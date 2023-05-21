@@ -28,6 +28,16 @@ public class UsuarioServiceImp implements IUsuarioService {
     public Usuario getUsuarioById(Long id) { 
         return this.usuarioRepository.findById(id).get();
     }
+
+    @Override
+    public String getUsuarioNombreByNombreUsuario(String nombreUsuario) {
+        Usuario query = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
+        String result = "";
+        if( query != null ) {
+            result = query.getNombre();
+        }
+        return result;
+    }
     
     @Override
     public ResponseEntity<?> saveUsuario(Usuario usuario) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,6 +41,12 @@ public class UsuarioController {
     @PreAuthorize("hasRole('ADMIN')")
     public Usuario getUsuarioById(@PathVariable Long id) throws JsonProcessingException, IOException { 
         return this.usuarioService.getUsuarioById(id);
+    }
+    
+    @GetMapping("/usuario/nombre")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('INSPECTOR') or hasRole('USER')")
+    public String getUsuarioNombreByNombreUsuario(@RequestParam(name = "nombreUsuario") String nombreUsuario) {
+        return this.usuarioService.getUsuarioNombreByNombreUsuario(nombreUsuario);
     }
     
     @PostMapping("/usuario")

@@ -1,11 +1,13 @@
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.DTO.SolicitudDTO;
 import com.echueca.clabtool.service.interfaces.ISolicitudService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Solicitud;
 import com.echueca.clabtool.model.Usuario;
 import com.echueca.clabtool.repository.SolicitudRepository;
 import com.echueca.clabtool.repository.UsuarioRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,12 @@ public class SolicitudServiceImp implements ISolicitudService {
     @Override
     public Solicitud getSolicitudById(Long id) {
         return this.solicitudRepository.findById(id).get();
+    }
+    
+    @Override
+    public List<Solicitud> getSolicitudByNombreUsuario(String nombreUsuario) {
+        Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
+        return this.solicitudRepository.findByusuarioSolicitud(user);
     }
     
     @Override
@@ -65,6 +73,25 @@ public class SolicitudServiceImp implements ISolicitudService {
         this.solicitudRepository.save(solicitud);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud actualizada."));
+    }
+
+    @Override
+    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario) {
+        Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
+        if( user == null ) {
+            String msg = "No se encuentra el usuario con el nombre \"" + nombreUsuario +"\"";
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, msg));
+        }
+        Solicitud insert = new Solicitud(solicitud);
+        insert.setUsuarioSolicitud(user);
+        insert.setFechaSolicitud(new Date());
+        this.solicitudRepository.save(insert);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud creada"));
+    }
+
+    @Override
+    public ResponseEntity<?> updateSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

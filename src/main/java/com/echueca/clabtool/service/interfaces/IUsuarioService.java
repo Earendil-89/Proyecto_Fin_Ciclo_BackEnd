@@ -19,4 +19,6 @@ public interface IUsuarioService {
     public ResponseEntity<?> updateUsuario(Usuario usuario);
     
     public ResponseEntity<?> deleteUsuarioById(Long id);
+    
+    public String getUsuarioNombreByNombreUsuario(String nombreUsuario);
 }
