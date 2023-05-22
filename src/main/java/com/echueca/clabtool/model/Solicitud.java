@@ -1,6 +1,7 @@
 package com.echueca.clabtool.model;
 
-import com.echueca.clabtool.DTO.SolicitudDTO;
+import com.echueca.clabtool.DTO.SolicitudCreateDTO;
+import com.echueca.clabtool.DTO.SolicitudProcessDTO;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,8 +70,8 @@ public class Solicitud {
         this.link = link;
     }
     
-    public Solicitud(SolicitudDTO dto) {
-        this.fechaSolicitud = dto.getFechaSolicitud();
+    public Solicitud(SolicitudCreateDTO dto) {
+        this.fechaSolicitud = new Date();
         this.estado = EstadoSolicitud.ESTADO_ESPERA;
         this.descripcion = dto.getDescripcion();
         this.codigoRecipiente = dto.getCodigoRecipiente();
