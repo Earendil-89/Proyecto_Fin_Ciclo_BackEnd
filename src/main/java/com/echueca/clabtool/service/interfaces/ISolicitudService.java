@@ -1,6 +1,7 @@
 package com.echueca.clabtool.service.interfaces;
 
-import com.echueca.clabtool.DTO.SolicitudDTO;
+import com.echueca.clabtool.DTO.SolicitudCreateDTO;
+import com.echueca.clabtool.DTO.SolicitudProcessDTO;
 import com.echueca.clabtool.model.Solicitud;
 import com.echueca.clabtool.model.Usuario;
 import java.util.List;
@@ -28,9 +29,9 @@ public interface ISolicitudService {
     
     public ResponseEntity<?> updateSolicitud(Solicitud solicitud);
     
-    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario);
+    public ResponseEntity<?> processSolicitud(SolicitudProcessDTO solicitud, String nombreUsuario);
     
-    public ResponseEntity<?> updateSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario);
+    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudCreateDTO solicitud, String nombreUsuario);
     
     public ResponseEntity<?> deleteSolicitud(Long id);
 }

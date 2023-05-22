@@ -1,6 +1,7 @@
 package com.echueca.clabtool.service;
 
-import com.echueca.clabtool.DTO.SolicitudDTO;
+import com.echueca.clabtool.DTO.SolicitudCreateDTO;
+import com.echueca.clabtool.DTO.SolicitudProcessDTO;
 import com.echueca.clabtool.service.interfaces.ISolicitudService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Solicitud;
@@ -74,9 +75,28 @@ public class SolicitudServiceImp implements ISolicitudService {
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud actualizada."));
     }
+    
+    @Override
+    public ResponseEntity<?> processSolicitud(SolicitudProcessDTO solicitud, String nombreUsuario) {
+        Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
+        if( user == null ) {
+            String msg = "No se encuentra el usuario con el nombre \"" + nombreUsuario +"\"";
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, msg));
+        }
+        Optional<Solicitud> attempt = solicitudRepository.findById(solicitud.getId());
+        if( attempt.isEmpty() ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "No se encuentra la solicitud en la base de datos."));
+        }
+        Solicitud update = attempt.get();
+        update.setUsuarioTramite(user);
+        update.setFechaTramite(new Date());
+        update.setEstado(solicitud.getEstado());
+        this.solicitudRepository.save(update);
+        return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud tramitada."));
+    }
 
     @Override
-    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario) {
+    public ResponseEntity<?> saveSolicitudByUsuario(SolicitudCreateDTO solicitud, String nombreUsuario) {
         Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
         if( user == null ) {
             String msg = "No se encuentra el usuario con el nombre \"" + nombreUsuario +"\"";
@@ -84,15 +104,10 @@ public class SolicitudServiceImp implements ISolicitudService {
         }
         Solicitud insert = new Solicitud(solicitud);
         insert.setUsuarioSolicitud(user);
-        insert.setFechaSolicitud(new Date());
         this.solicitudRepository.save(insert);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud creada"));
     }
 
-    @Override
-    public ResponseEntity<?> updateSolicitudByUsuario(SolicitudDTO solicitud, String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public ResponseEntity<?> deleteSolicitud(Long id) {
