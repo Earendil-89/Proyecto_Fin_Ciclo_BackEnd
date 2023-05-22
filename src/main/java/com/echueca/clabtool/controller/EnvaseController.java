@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,24 +29,26 @@ public class EnvaseController {
     private IEnvaseService envaseService;
     
     @GetMapping("/manager/envase")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public List<Envase> getEnvase() {
         return this.envaseService.getEnvase();
     }
     
-    
     @PostMapping("/envase")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> saveEnvase(@RequestBody Envase envase) {
         return this.envaseService.saveEnvase(envase);
     }
     
     @PutMapping("/envase")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updateEnvase(@RequestBody Envase envase) {
         return this.envaseService.updateEnvase(envase);
     }
     
-    @DeleteMapping("/envase")
-    public ResponseEntity<?> deleteEnvase(@RequestBody Long id) {
+    @DeleteMapping("/envase/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
+    public ResponseEntity<?> deleteEnvase(@PathVariable Long id) {
         return this.envaseService.deleteEnvase(id);
     }
 }
