@@ -1,6 +1,7 @@
 package com.echueca.clabtool.controller;
 
-import com.echueca.clabtool.DTO.SolicitudDTO;
+import com.echueca.clabtool.DTO.SolicitudCreateDTO;
+import com.echueca.clabtool.DTO.SolicitudProcessDTO;
 import com.echueca.clabtool.model.Solicitud;
 import com.echueca.clabtool.service.interfaces.ISolicitudService;
 import java.util.List;
@@ -72,14 +73,15 @@ public class SolicitudController {
         return this.solicitudService.updateSolicitud(solicitud);
     }
     
-    @PostMapping("/solicitud/usuario")
-    public ResponseEntity<?> saveSolicitudByUser(@RequestBody SolicitudDTO solicitud, @RequestParam(name = "nombreUsuario") String nombreUsuario) {
-        return this.solicitudService.saveSolicitudByUsuario(solicitud, nombreUsuario);
+    @PutMapping("solicitud/usuario")
+    @PreAuthorize("hasRole('INSPECTOR')")
+    public ResponseEntity<?> processSolicitud(@RequestBody SolicitudProcessDTO solicitud, @RequestParam(name = "nombreUsuario") String nombreUsuario) {
+        return this.solicitudService.processSolicitud(solicitud, nombreUsuario);
     }
     
-    @PutMapping("/solicitud/usuario")
-    public ResponseEntity<?> updateSolicitudByUser(@RequestBody SolicitudDTO solicitud, @RequestParam(name = "nombreUsuario") String nombreUsuario) {
-        return this.solicitudService.updateSolicitudByUsuario(solicitud, nombreUsuario);
+    @PostMapping("/solicitud/usuario")
+    public ResponseEntity<?> saveSolicitudByUser(@RequestBody SolicitudCreateDTO solicitud, @RequestParam(name = "nombreUsuario") String nombreUsuario) {
+        return this.solicitudService.saveSolicitudByUsuario(solicitud, nombreUsuario);
     }
     
     @DeleteMapping("/solicitud/{id}")
