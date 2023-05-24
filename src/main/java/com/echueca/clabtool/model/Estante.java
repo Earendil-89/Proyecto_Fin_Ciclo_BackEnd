@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +21,11 @@ public class Estante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
+    @NotBlank
     @Getter @Setter private String nombre;
     @Getter @Setter private String descripcion;
     
+    @NotBlank
     @ManyToOne
     @Getter @Setter private Armario armario;
 
