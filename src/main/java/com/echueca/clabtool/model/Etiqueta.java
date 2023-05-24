@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,7 @@ public class Etiqueta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
     
+    @NotBlank
     @Getter @Setter private String codigo;
     @Getter @Setter private String descripcion;
     @Getter @Setter private String imgUrl;

@@ -24,6 +24,7 @@ public class Compuesto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter long id;
     
+    @NotBlank
     @Getter @Setter private String cas;
     
     @NotBlank

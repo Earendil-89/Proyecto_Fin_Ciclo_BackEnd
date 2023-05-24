@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +22,12 @@ public class Unidad {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Getter @Setter private int id;
+    @NotBlank
     @Enumerated(EnumType.STRING)
     @Getter @Setter private EUnidad unidad;
+    @NotBlank
     @Getter @Setter private String nombre;
+    @NotBlank
     @Getter @Setter private String tipo;
 
     public Unidad() {

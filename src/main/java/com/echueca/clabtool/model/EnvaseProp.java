@@ -1,10 +1,7 @@
 package com.echueca.clabtool.model;
 
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +10,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,18 +20,24 @@ import lombok.Setter;
  * @author Eduardo Chueca Montaner
  */
 @Entity
-@Table(name ="propiedades_envase")
+@Table(name ="propiedades_envase", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "codigo")
+})
 public class EnvaseProp {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
     
+    @NotBlank
     @Getter @Setter private String codigo;
+    @NotBlank
     @Getter @Setter private String nombre;
     @Getter @Setter private double pureza;
+    @NotBlank
     @Getter @Setter private double capacidad;
     
+    @NotBlank
     @ManyToOne
     @Getter @Setter private Compuesto compuesto;
     
@@ -49,6 +54,7 @@ public class EnvaseProp {
     @Getter @Setter private Set<Etiqueta> etiquetas;
     @Getter @Setter private String urlFabricante;
     
+    @NotBlank
     @ManyToOne
     @Getter @Setter private Unidad unidades;
 

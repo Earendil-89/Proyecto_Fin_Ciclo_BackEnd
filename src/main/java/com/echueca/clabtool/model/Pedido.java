@@ -34,6 +34,7 @@ public class Pedido {
     @NotBlank
     @Getter @Setter private String factura;
     
+    @NotBlank
     @ManyToOne
     @Getter @Setter private Usuario usuario;
 
