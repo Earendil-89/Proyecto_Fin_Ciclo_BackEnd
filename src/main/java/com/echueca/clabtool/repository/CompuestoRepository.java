@@ -1,6 +1,7 @@
 package com.echueca.clabtool.repository;
 
 import com.echueca.clabtool.model.Compuesto;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CompuestoRepository extends JpaRepository<Compuesto, Long> {
     
     public Compuesto findByCas(String cas);
+    
+    public List<Compuesto> findByNombreContainsIgnoreCase(String nombre);
 }
