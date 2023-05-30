@@ -19,16 +19,30 @@ public class FraseServiceImp implements IFraseService {
     @Autowired
     private FraseRepository fraseRepository;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Frase> getFrase() {
         return this.fraseRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Frase getFraseById(Long id) {
         return this.fraseRepository.findById(id).get();
     }
 
+    /**
+     *
+     * @param frase
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveFrase(Frase frase) {
         Frase testFrase = this.fraseRepository.findByCodigo(frase.getCodigo());
@@ -41,6 +55,11 @@ public class FraseServiceImp implements IFraseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El código de la frase ya está en uso."));
     }
 
+    /**
+     *
+     * @param frase
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateFrase(Frase frase) {
         Frase testFrase = this.fraseRepository.findByCodigo(frase.getCodigo());
@@ -53,6 +72,11 @@ public class FraseServiceImp implements IFraseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase creada."));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteFrase(Long id) {
         this.fraseRepository.deleteById(id);

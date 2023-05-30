@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Procesa peticiones HTTP para realizar un CRUD en la base de datos
  * @author Eduardo Chueca Montaner
  */
 @CrossOrigin("*")
@@ -21,6 +21,10 @@ public class UnidadController {
     @Autowired
     private UnidadRepository unidadRepository;
     
+    /**
+     * Devuelve las unidades almacenadas en la base de datos
+     * @return Lista de unidades
+     */
     @GetMapping("/unidad")
     public List<Unidad> getUnidad() {
         return this.unidadRepository.findByOrderById();

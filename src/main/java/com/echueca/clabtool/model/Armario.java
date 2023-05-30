@@ -24,9 +24,18 @@ public class Armario {
     @Getter @Setter private String nombre;
     @Getter @Setter private String descripcion;
     
+    /**
+     *
+     */
     public Armario() {
     }
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param descripcion
+     */
     public Armario(long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;

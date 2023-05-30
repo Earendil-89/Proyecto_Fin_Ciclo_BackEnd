@@ -27,32 +27,59 @@ public class SolicitudServiceImp implements ISolicitudService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Solicitud> getSolicitud() {
         return this.solicitudRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Solicitud getSolicitudById(Long id) {
         return this.solicitudRepository.findById(id).get();
     }
     
+    /**
+     *
+     * @param nombreUsuario
+     * @return
+     */
     @Override
     public List<Solicitud> getSolicitudByNombreUsuario(String nombreUsuario) {
         Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
         return this.solicitudRepository.findByusuarioSolicitud(user);
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Solicitud> getActiveSolicitud() {
         return this.solicitudRepository.findByEstadoContaining("ESTADO_ESPERA");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Solicitud> getInactiveSolicitud() {
         return this.solicitudRepository.findByEstadoNotContaining("ESTADO_ESPERA");
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<Solicitud> getSolicitudByUsuarioId(Long id) {
         Optional<Usuario> testEntity = this.usuarioRepository.findById(id);
@@ -62,6 +89,11 @@ public class SolicitudServiceImp implements ISolicitudService {
         return this.solicitudRepository.findByusuarioSolicitud(testEntity.get());
     }
     
+    /**
+     *
+     * @param solicitud
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveSolicitud(Solicitud solicitud) {
         this.solicitudRepository.save(solicitud);
@@ -69,6 +101,11 @@ public class SolicitudServiceImp implements ISolicitudService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud creada"));
     }
 
+    /**
+     *
+     * @param solicitud
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateSolicitud(Solicitud solicitud) {
         this.solicitudRepository.save(solicitud);
@@ -76,6 +113,12 @@ public class SolicitudServiceImp implements ISolicitudService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud actualizada."));
     }
     
+    /**
+     *
+     * @param solicitud
+     * @param nombreUsuario
+     * @return
+     */
     @Override
     public ResponseEntity<?> processSolicitud(SolicitudProcessDTO solicitud, String nombreUsuario) {
         Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
@@ -95,6 +138,12 @@ public class SolicitudServiceImp implements ISolicitudService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud tramitada."));
     }
 
+    /**
+     *
+     * @param solicitud
+     * @param nombreUsuario
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveSolicitudByUsuario(SolicitudCreateDTO solicitud, String nombreUsuario) {
         Usuario user = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
@@ -108,7 +157,11 @@ public class SolicitudServiceImp implements ISolicitudService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Solicitud creada"));
     }
 
-
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteSolicitud(Long id) {
         this.solicitudRepository.deleteById(id);

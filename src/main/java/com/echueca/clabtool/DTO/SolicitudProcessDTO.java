@@ -16,9 +16,17 @@ public class SolicitudProcessDTO {
     @Getter @Setter private long id;
     @Getter @Setter private EstadoSolicitud estado;
 
+    /**
+     *
+     */
     public SolicitudProcessDTO() {
     }
 
+    /**
+     *
+     * @param id
+     * @param estado
+     */
     public SolicitudProcessDTO(long id, EstadoSolicitud estado) {
         this.id = id;
         this.estado = estado;

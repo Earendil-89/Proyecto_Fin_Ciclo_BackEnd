@@ -15,9 +15,19 @@ public class EnvaseSearchDTO {
     @Setter @Getter private String nombre;
     @Setter @Getter private double pureza;
 
+    /**
+     *
+     */
     public EnvaseSearchDTO() {
     }
 
+    /**
+     *
+     * @param compuestoId
+     * @param codigo
+     * @param nombre
+     * @param pureza
+     */
     public EnvaseSearchDTO(long compuestoId, String codigo, String nombre, double pureza) {
         this.compuestoId = compuestoId;
         this.codigo = codigo;
@@ -25,7 +35,14 @@ public class EnvaseSearchDTO {
         this.pureza = pureza;
     }
     
-        public EnvaseSearchDTO(Long compuestoId, String codigo, String nombre, Double pureza) {
+    /**
+     *
+     * @param compuestoId
+     * @param codigo
+     * @param nombre
+     * @param pureza
+     */
+    public EnvaseSearchDTO(Long compuestoId, String codigo, String nombre, Double pureza) {
         this.compuestoId = compuestoId == null ? 0 : compuestoId.longValue();
         this.codigo = codigo == null ? "" : codigo;
         this.nombre = nombre == null ? "" : nombre;

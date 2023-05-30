@@ -27,9 +27,18 @@ public class Frase {
     @Getter @Setter private String codigo;
     @Getter @Setter private String descripcion;
 
+    /**
+     *
+     */
     public Frase() {
     }
 
+    /**
+     *
+     * @param id
+     * @param codigo
+     * @param descripcion
+     */
     public Frase(long id, String codigo, String descripcion) {
         this.id = id;
         this.codigo = codigo;

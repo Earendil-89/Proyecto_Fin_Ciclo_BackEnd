@@ -24,16 +24,30 @@ public class EstanteServiceImp implements IEstanteService {
     @Autowired
     private ArmarioRepository armarioRepository;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Estante> getEstante() {
         return this.estanteRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Estante getEstanteById(Long id) {
         return this.estanteRepository.findById(id).get();
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<Estante> getEstanteByArmarioId(Long id) {
         Armario armario = this.armarioRepository.findById(id).get();
@@ -41,6 +55,11 @@ public class EstanteServiceImp implements IEstanteService {
         return this.estanteRepository.findByArmario(armario);
     }
 
+    /**
+     *
+     * @param estante
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveEstante(Estante estante) {
         Estante testEstante = estanteRepository.findByNombre(estante.getNombre());
@@ -53,6 +72,11 @@ public class EstanteServiceImp implements IEstanteService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El nombre de estante ya está en uso."));
     }
 
+    /**
+     *
+     * @param estante
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateEstante(Estante estante) {
         Estante testEstante = estanteRepository.findByNombre(estante.getNombre());
@@ -65,6 +89,11 @@ public class EstanteServiceImp implements IEstanteService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Estante actualizado corréctamente."));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteEstante(Long id) {
         this.estanteRepository.deleteById(id);

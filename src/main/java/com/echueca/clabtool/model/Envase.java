@@ -33,9 +33,21 @@ public class Envase {
     @ManyToOne
     @Getter @Setter Pedido pedido;
 
+    /**
+     *
+     */
     public Envase() {
     }
 
+    /**
+     *
+     * @param id
+     * @param cantidad
+     * @param disponible
+     * @param estante
+     * @param propiedades
+     * @param pedido
+     */
     public Envase(long id, double cantidad, boolean disponible, Estante estante, EnvaseProp propiedades, Pedido pedido) {
         this.id = id;
         this.cantidad = cantidad;

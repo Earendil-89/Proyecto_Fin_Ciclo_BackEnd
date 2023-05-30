@@ -10,13 +10,37 @@ import org.springframework.http.ResponseEntity;
  */
 public interface IPedidoService {
     
+    /**
+     *
+     * @return
+     */
     public List<Pedido> getPedido();
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Pedido getPedidoById(Long id);
     
+    /**
+     *
+     * @param pedido
+     * @return
+     */
     public ResponseEntity<?> savePedido(Pedido pedido);
     
+    /**
+     *
+     * @param pedido
+     * @return
+     */
     public ResponseEntity<?> updatePedido(Pedido pedido);
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ResponseEntity<?> deletePedido(Long id);
 }

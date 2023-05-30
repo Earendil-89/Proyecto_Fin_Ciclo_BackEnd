@@ -24,7 +24,7 @@ public class UsoEnvase {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private long id;
+    @Getter @Setter private long id; 
     
     @NotBlank
     @ManyToOne
@@ -33,18 +33,33 @@ public class UsoEnvase {
     @ManyToOne
     @Getter @Setter private Envase envase;
     
-    @Temporal(TemporalType.DATE) @NotBlank
+    @Temporal(TemporalType.TIMESTAMP) @NotBlank
     @Getter @Setter private Date fechaUso;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Getter @Setter private Date fechaDevolucion;
     @Getter @Setter private String razonUso;
     @Getter @Setter private String comentarios;
     @Getter @Setter private double cantidadUsada;
     @Getter @Setter private boolean agotado;
 
+    /**
+     *
+     */
     public UsoEnvase() {
     }
 
+    /**
+     *
+     * @param id
+     * @param usuario
+     * @param envase
+     * @param fechaUso
+     * @param fechaDevolucion
+     * @param razonUso
+     * @param comentarios
+     * @param cantidadUsada
+     * @param agotado
+     */
     public UsoEnvase(long id, Usuario usuario, Envase envase, Date fechaUso, Date fechaDevolucion, String razonUso, String comentarios, double cantidadUsada, boolean agotado) {
         this.id = id;
         this.usuario = usuario;

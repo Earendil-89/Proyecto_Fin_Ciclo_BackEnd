@@ -19,16 +19,30 @@ public class PedidoServiceImp implements IPedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
     
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Pedido> getPedido() {
         return this.pedidoRepository.findAll();
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Pedido getPedidoById(Long id) {
         return this.pedidoRepository.findById(id).get();
     }
 
+    /**
+     *
+     * @param pedido
+     * @return
+     */
     @Override
     public ResponseEntity<?> savePedido(Pedido pedido) {
         this.pedidoRepository.save(pedido);
@@ -36,6 +50,11 @@ public class PedidoServiceImp implements IPedidoService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Pedido guardado."));
     }
 
+    /**
+     *
+     * @param pedido
+     * @return
+     */
     @Override
     public ResponseEntity<?> updatePedido(Pedido pedido) {
         this.pedidoRepository.save(pedido);
@@ -43,6 +62,11 @@ public class PedidoServiceImp implements IPedidoService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Pedido actualizado."));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deletePedido(Long id) {
         this.pedidoRepository.deleteById(id);

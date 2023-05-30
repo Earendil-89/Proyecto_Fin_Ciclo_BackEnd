@@ -58,9 +58,25 @@ public class EnvaseProp {
     @ManyToOne
     @Getter @Setter private Unidad unidades;
 
+    /**
+     *
+     */
     public EnvaseProp() {
     }
 
+    /**
+     *
+     * @param id
+     * @param codigo
+     * @param nombre
+     * @param pureza
+     * @param capacidad
+     * @param unidades
+     * @param compuesto
+     * @param frases
+     * @param etiquetas
+     * @param urlFabricante
+     */
     public EnvaseProp(long id, String codigo, String nombre, double pureza, double capacidad, Unidad unidades, Compuesto compuesto, Set<Frase> frases, Set<Etiqueta> etiquetas, String urlFabricante) {
         this.id = id;
         this.codigo = codigo;

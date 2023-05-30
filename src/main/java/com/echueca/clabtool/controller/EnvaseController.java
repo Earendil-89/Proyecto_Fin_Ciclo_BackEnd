@@ -1,6 +1,6 @@
 package com.echueca.clabtool.controller;
 
-import com.echueca.clabtool.DTO.EnvaseReturnDTO;
+import com.echueca.clabtool.DTO.EnvaseResponseDTO;
 import com.echueca.clabtool.DTO.EnvaseSearchDTO;
 import com.echueca.clabtool.model.Envase;
 import com.echueca.clabtool.service.interfaces.IEnvaseService;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
- *
+ * Procesa peticiones HTTP para realizar un CRUD en la base de datos
  * @author Eduardo Chueca Montaner
  */
 @CrossOrigin
@@ -33,15 +33,29 @@ public class EnvaseController {
     @Autowired
     private IEnvaseService envaseService;
     
+    /**
+     * Solicita todos los envases almacenados en la base de datos
+     * @return Lista con todos los envases
+     */
     @GetMapping("/manager/envase")
     @PreAuthorize("hasRole('INSPECTOR')")
     public List<Envase> getEnvase() {
         return this.envaseService.getEnvase();
     }
     
+    /**
+     * Devuelve resultados de una búsqueda de envases a los usuarios con rol USER.
+     * Al menos un parámetro, sin contar pureza, debe de ser enviado.
+     * No se envia información con la localización del envase.
+     * @param compuestoId ID de compuesto químico
+     * @param codigo Código de envase
+     * @param nombre Nombre del compuesto químico o del envase
+     * @param pureza Pureza mínima
+     * @return
+     */
     @GetMapping("/user/envase")
     @PreAuthorize("hasRole('USER')")
-    public List<EnvaseReturnDTO> getEnvaseAsUser(@RequestParam(required = false) Long compuestoId,
+    public List<EnvaseResponseDTO> getEnvaseAsUser(@RequestParam(required = false) Long compuestoId,
             @RequestParam(required = false) String codigo,
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) Double pureza ) {
@@ -54,18 +68,33 @@ public class EnvaseController {
         return this.envaseService.getEnvaseAsUser(envase);
     }
     
+    /**
+     * Inserta un nuevo envase en la base de datos
+     * @param envase Envase a insertar
+     * @return
+     */
     @PostMapping("/envase")
     @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> saveEnvase(@RequestBody Envase envase) {
         return this.envaseService.saveEnvase(envase);
     }
     
+    /**
+     * Actualiza un envase existente en la base de datos
+     * @param envase Envase a actualizar
+     * @return
+     */
     @PutMapping("/envase")
     @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updateEnvase(@RequestBody Envase envase) {
         return this.envaseService.updateEnvase(envase);
     }
     
+    /**
+     * Elimina un envase de la base de datos
+     * @param id ID del envase a borrar
+     * @return
+     */
     @DeleteMapping("/envase/{id}")
     @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> deleteEnvase(@PathVariable Long id) {

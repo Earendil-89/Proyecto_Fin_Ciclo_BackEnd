@@ -10,13 +10,37 @@ import org.springframework.http.ResponseEntity;
  */
 public interface IEtiquetaService {
     
+    /**
+     *
+     * @return
+     */
     public List<Etiqueta> getEtiqueta();
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Etiqueta getEtiquetaById(Long id);
     
+    /**
+     *
+     * @param etiqueta
+     * @return
+     */
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta);
     
+    /**
+     *
+     * @param etiqueta
+     * @return
+     */
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta);
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ResponseEntity<?> deleteEtiqueta(Long id);
 }

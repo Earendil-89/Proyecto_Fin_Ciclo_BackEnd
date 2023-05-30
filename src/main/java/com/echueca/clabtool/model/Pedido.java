@@ -38,9 +38,21 @@ public class Pedido {
     @ManyToOne
     @Getter @Setter private Usuario usuario;
 
+    /**
+     *
+     */
     public Pedido() {
     }
 
+    /**
+     *
+     * @param id
+     * @param importe
+     * @param fechaPedido
+     * @param fechaEntrega
+     * @param factura
+     * @param usuario
+     */
     public Pedido(long id, double importe, Date fechaPedido, Date fechaEntrega, String factura, Usuario usuario) {
         this.id = id;
         this.importe = importe;

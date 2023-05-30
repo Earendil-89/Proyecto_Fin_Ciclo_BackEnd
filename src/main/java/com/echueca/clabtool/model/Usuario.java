@@ -43,6 +43,14 @@ public class Usuario {
     @Size(max = 30)
     @Getter @Setter private String email;
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param apellidos
+     * @param nombreUsuario
+     * @param email
+     */
     public Usuario(long id, String nombre, String apellidos, String nombreUsuario, String email) {
         this.id = id;
         this.nombre = nombre;
@@ -51,6 +59,9 @@ public class Usuario {
         this.email = email;
     }
 
+    /**
+     *
+     */
     public Usuario() {
     }
 }

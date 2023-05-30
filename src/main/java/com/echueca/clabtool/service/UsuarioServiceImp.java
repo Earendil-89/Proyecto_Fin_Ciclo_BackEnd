@@ -19,16 +19,30 @@ public class UsuarioServiceImp implements IUsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
     
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Usuario> getUsuario() {
         return this.usuarioRepository.findAll();
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Usuario getUsuarioById(Long id) { 
         return this.usuarioRepository.findById(id).get();
     }
 
+    /**
+     *
+     * @param nombreUsuario
+     * @return
+     */
     @Override
     public String getUsuarioNombreByNombreUsuario(String nombreUsuario) {
         Usuario query = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
@@ -39,6 +53,11 @@ public class UsuarioServiceImp implements IUsuarioService {
         return result;
     }
     
+    /**
+     *
+     * @param usuario
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveUsuario(Usuario usuario) {
         Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
@@ -50,6 +69,11 @@ public class UsuarioServiceImp implements IUsuarioService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Usuario creado."));
     }
     
+    /**
+     *
+     * @param usuario
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateUsuario(Usuario usuario) {
         Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
@@ -61,6 +85,11 @@ public class UsuarioServiceImp implements IUsuarioService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Usuario actualizado."));
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteUsuarioById(Long id ){
         this.usuarioRepository.deleteById(id);

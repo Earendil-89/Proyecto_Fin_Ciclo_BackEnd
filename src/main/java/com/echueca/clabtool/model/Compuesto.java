@@ -33,9 +33,22 @@ public class Compuesto {
     @Getter @Setter private double pesoMolecular;
     @Getter @Setter private String imgUrl;
 
+    /**
+     *
+     */
     public Compuesto() {
     }
 
+    /**
+     *
+     * @param id
+     * @param cas
+     * @param nombre
+     * @param nombreSecundario
+     * @param formula
+     * @param pesoMolecular
+     * @param imgUrl
+     */
     public Compuesto(long id, String cas, String nombre, String nombreSecundario, String formula, double pesoMolecular, String imgUrl) {
         this.id = id;
         this.cas = cas;

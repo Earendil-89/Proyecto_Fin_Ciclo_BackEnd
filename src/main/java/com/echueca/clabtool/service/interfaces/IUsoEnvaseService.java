@@ -1,5 +1,6 @@
 package com.echueca.clabtool.service.interfaces;
 
+import com.echueca.clabtool.DTO.EnvaseExtractDTO;
 import com.echueca.clabtool.model.Envase;
 import com.echueca.clabtool.model.UsoEnvase;
 import java.util.List;
@@ -11,21 +12,57 @@ import org.springframework.http.ResponseEntity;
  */
 public interface IUsoEnvaseService {
     
+    /**
+     *
+     * @return
+     */
     public List<UsoEnvase> getUsoEnvase();
     
+    /**
+     *
+     * @return
+     */
     public List<UsoEnvase> getActiveUsoEnvase();
     
+    /**
+     *
+     * @param nombreUsuario
+     * @return
+     */
+    public List<UsoEnvase> getActiveUsoEnvaseByNombreUsuario(String nombreUsuario);
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
     public UsoEnvase getUsoEnvaseById(Long id);
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public List<UsoEnvase> getUsoEnvaseByUserId(Long id);
     
-    public ResponseEntity<?> startUsoEnvase(Long id);
+    /**
+     *
+     * @param extr
+     * @return
+     */
+    public ResponseEntity<?> saveUsoEnvase(EnvaseExtractDTO extr);
     
-    public ResponseEntity<?> endUsoENvase(Long id);
+    /**
+     *
+     * @param usoEnvase
+     * @return
+     */
+    public ResponseEntity<?> updateUsoEnvase(UsoEnvase usoEnvase);
     
-    public ResponseEntity<?> saveUsoEnvase(Envase envase);
-    
-    public ResponseEntity<?> updateUsoEnvase(Envase envase);
-    
-    public ResponseEntity<?> deleteUsoEnvase(Envase envase);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public ResponseEntity<?> deleteUsoEnvase(Long id);
 }

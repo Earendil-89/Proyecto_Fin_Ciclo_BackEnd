@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Procesa peticiones HTTP para realizar un CRUD en la base de datos
  * @author Eduardo Chueca Montaner
  */
 @CrossOrigin(origins = "*")
@@ -33,16 +33,36 @@ public class FraseController {
     @Autowired
     private IFraseService fraseService;
     
+    /**
+     * Devuelve las frases almacenadas en la base de datos
+     * @return Lista de frases
+     * @throws JsonProcessingException
+     * @throws IOException
+     */
     @GetMapping("/frase")
     public List<Frase> getFrase() throws JsonProcessingException, IOException {
         return this.fraseService.getFrase();
     }
     
+    /**
+     * Realiza una búsqueda de frase por ID
+     * @param id ID de la frase a buscar
+     * @return Frase si la búsqueda fué satisfactoria, falso en caso contrario
+     * @throws JsonProcessingException
+     * @throws IOException
+     */
     @GetMapping("/frase/{id}")
     public Frase getFraseById(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.fraseService.getFraseById(id);
     }
     
+    /**
+     * Inserta una nueva frase en la base de datos
+     * @param frase Frase a insertar
+     * @return Mensaje de respuesta
+     * @throws JsonProcessingException
+     * @throws IOException
+     */
     @PostMapping("/frase")
     public ResponseEntity<?> saveFrase(@RequestBody Frase frase) throws JsonProcessingException, IOException {
         this.fraseService.saveFrase(frase);
@@ -50,6 +70,13 @@ public class FraseController {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase creada."));
     }
     
+    /**
+     * Actualiza una frase en la base de datos
+     * @param frase Frase a actualizar
+     * @return Mensaje de respuesta
+     * @throws JsonProcessingException
+     * @throws IOException
+     */
     @PutMapping("/frase")
     public ResponseEntity<?> updateFrase(@RequestBody Frase frase) throws JsonProcessingException, IOException {
         this.fraseService.updateFrase(frase);
@@ -57,6 +84,13 @@ public class FraseController {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Frase actualizada."));
     }
     
+    /**
+     * Borra una frase de la base de datos
+     * @param id Id de la frase a borrar
+     * @return Mensaje de respuesta
+     * @throws JsonProcessingException
+     * @throws IOException
+     */
     @DeleteMapping("/frase/{id}")
     public ResponseEntity<?> deleteFrase(@PathVariable Long id) throws JsonProcessingException, IOException {
         this.fraseService.deleteFrase(id);

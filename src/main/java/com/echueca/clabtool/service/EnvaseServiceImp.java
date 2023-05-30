@@ -1,6 +1,6 @@
 package com.echueca.clabtool.service;
 
-import com.echueca.clabtool.DTO.EnvaseReturnDTO;
+import com.echueca.clabtool.DTO.EnvaseResponseDTO;
 import com.echueca.clabtool.DTO.EnvaseSearchDTO;
 import com.echueca.clabtool.service.interfaces.IEnvaseService;
 import com.echueca.clabtool.controller.MessageResponse;
@@ -13,10 +13,9 @@ import com.echueca.clabtool.repository.CompuestoRepository;
 import com.echueca.clabtool.repository.EnvasePropRepository;
 import com.echueca.clabtool.repository.EnvaseRepository;
 import com.echueca.clabtool.repository.UsoEnvaseRepository;
+import com.echueca.clabtool.repository.UsuarioRepository;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,14 +36,25 @@ public class EnvaseServiceImp implements IEnvaseService {
     private CompuestoRepository compuestoRepository;
     @Autowired
     private UsoEnvaseRepository usoEnvaseRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Envase> getEnvase() {
         return this.envaseRepository.findAll();
     }
     
+    /**
+     *
+     * @param envase
+     * @return
+     */
     @Override
-    public List<EnvaseReturnDTO> getEnvaseAsUser(EnvaseSearchDTO envase) {
+    public List<EnvaseResponseDTO> getEnvaseAsUser(EnvaseSearchDTO envase) {
          
         List<Envase> search = new ArrayList<>();
         boolean searchStarted = false;
@@ -69,7 +79,7 @@ public class EnvaseServiceImp implements IEnvaseService {
         if( search == null || search.size() < 1 ) {
             return new ArrayList<>();
         }
-        List<EnvaseReturnDTO> result = new ArrayList<>();
+        List<EnvaseResponseDTO> result = new ArrayList<>();
         List<UsoEnvase> envasesUso = this.usoEnvaseRepository.findByFechaDevolucionNotNull();
         for( Envase e: search ) {
             if( e.getPropiedades().getPureza() < envase.getPureza() ) {
@@ -82,7 +92,7 @@ public class EnvaseServiceImp implements IEnvaseService {
                 }
             }
             
-            EnvaseReturnDTO buffer = new EnvaseReturnDTO(e.getId(),
+            EnvaseResponseDTO buffer = new EnvaseResponseDTO(e.getId(),
                 e.getCantidad(),
                 e.getPropiedades(),
                 usuario);
@@ -92,6 +102,11 @@ public class EnvaseServiceImp implements IEnvaseService {
         return result;
     }
 
+    /**
+     *
+     * @param envase
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveEnvase(Envase envase) {
         this.envaseRepository.save(envase);
@@ -99,6 +114,11 @@ public class EnvaseServiceImp implements IEnvaseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Envase guardado"));
     }
 
+    /**
+     *
+     * @param envase
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateEnvase(Envase envase) {
         this.envaseRepository.save(envase);
@@ -106,6 +126,11 @@ public class EnvaseServiceImp implements IEnvaseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Envase actualizado"));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteEnvase(Long id) {
         this.envaseRepository.deleteById(id);

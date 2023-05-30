@@ -20,16 +20,30 @@ public class EtiquetaServiceImp implements IEtiquetaService {
     @Autowired
     private EtiquetaRepository etiquetaRepository;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Etiqueta> getEtiqueta() {
         return this.etiquetaRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Etiqueta getEtiquetaById(Long id) {
         return this.etiquetaRepository.findById(id).get();
     }
 
+    /**
+     *
+     * @param etiqueta
+     * @return
+     */
     @Override
     public ResponseEntity<?> saveEtiqueta(Etiqueta etiqueta) {
         Etiqueta testEntity = this.etiquetaRepository.findByCodigo(etiqueta.getCodigo());
@@ -42,6 +56,11 @@ public class EtiquetaServiceImp implements IEtiquetaService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El codigo de la etiqueta ya existe."));
     }
 
+    /**
+     *
+     * @param etiqueta
+     * @return
+     */
     @Override
     public ResponseEntity<?> updateEtiqueta(Etiqueta etiqueta) {
         Etiqueta testEntity = this.etiquetaRepository.findByCodigo(etiqueta.getCodigo());
@@ -54,6 +73,11 @@ public class EtiquetaServiceImp implements IEtiquetaService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Etiqueta actualizada."));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<?> deleteEtiqueta(Long id) {
         this.etiquetaRepository.deleteById(id);

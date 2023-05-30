@@ -55,9 +55,24 @@ public class Solicitud {
     
     @Getter @Setter private String link;
 
+    /**
+     *
+     */
     public Solicitud() {
     }
 
+    /**
+     *
+     * @param id
+     * @param fechaSolicitud
+     * @param usuarioSolicitud
+     * @param fechaTramite
+     * @param usuarioTramite
+     * @param estado
+     * @param descripcion
+     * @param idRecipiente
+     * @param link
+     */
     public Solicitud(long id, Date fechaSolicitud, Usuario usuarioSolicitud, Date fechaTramite, Usuario usuarioTramite, EstadoSolicitud estado, String descripcion, String idRecipiente, String link) {
         this.id = id;
         this.fechaSolicitud = fechaSolicitud;
@@ -70,6 +85,10 @@ public class Solicitud {
         this.link = link;
     }
     
+    /**
+     *
+     * @param dto
+     */
     public Solicitud(SolicitudCreateDTO dto) {
         this.fechaSolicitud = new Date();
         this.estado = EstadoSolicitud.ESTADO_ESPERA;

@@ -30,9 +30,19 @@ public class Unidad {
     @NotBlank
     @Getter @Setter private String tipo;
 
+    /**
+     *
+     */
     public Unidad() {
     }
 
+    /**
+     *
+     * @param id
+     * @param unidad
+     * @param nombre
+     * @param tipo
+     */
     public Unidad(int id, EUnidad unidad, String nombre, String tipo) {
         this.id = id;
         this.unidad = unidad;

@@ -30,9 +30,19 @@ public class Etiqueta {
     @Getter @Setter private String descripcion;
     @Getter @Setter private String imgUrl;
 
+    /**
+     *
+     */
     public Etiqueta() {
     }
 
+    /**
+     *
+     * @param id
+     * @param codigo
+     * @param descripcion
+     * @param imgUrl
+     */
     public Etiqueta(long id, String codigo, String descripcion, String imgUrl) {
         this.id = id;
         this.codigo = codigo;

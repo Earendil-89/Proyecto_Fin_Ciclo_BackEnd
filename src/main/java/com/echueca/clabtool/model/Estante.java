@@ -29,9 +29,19 @@ public class Estante {
     @ManyToOne
     @Getter @Setter private Armario armario;
 
+    /**
+     *
+     */
     public Estante() {
     }
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param descripcion
+     * @param armario
+     */
     public Estante(long id, String nombre, String descripcion, Armario armario) {
         this.id = id;
         this.nombre = nombre;
