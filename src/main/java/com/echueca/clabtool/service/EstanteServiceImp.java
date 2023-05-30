@@ -25,8 +25,8 @@ public class EstanteServiceImp implements IEstanteService {
     private ArmarioRepository armarioRepository;
 
     /**
-     *
-     * @return
+     * Busca todos los estantes almacenados en la base de datos
+     * @return Lista con estantes
      */
     @Override
     public List<Estante> getEstante() {
@@ -34,9 +34,9 @@ public class EstanteServiceImp implements IEstanteService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Busca un estante por su ID
+     * @param id ID del estante
+     * @return Estante en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public Estante getEstanteById(Long id) {
@@ -44,9 +44,9 @@ public class EstanteServiceImp implements IEstanteService {
     }
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca un estante por el ID del armario al que pertenece
+     * @param id ID del armario
+     * @return Lista con estantes
      */
     @Override
     public List<Estante> getEstanteByArmarioId(Long id) {
@@ -56,9 +56,9 @@ public class EstanteServiceImp implements IEstanteService {
     }
 
     /**
-     *
-     * @param estante
-     * @return
+     * Inserta un estante en la base de datos
+     * @param estante Estante a insertar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveEstante(Estante estante) {
@@ -73,9 +73,9 @@ public class EstanteServiceImp implements IEstanteService {
     }
 
     /**
-     *
-     * @param estante
-     * @return
+     * Actualiza un estante existente en la base de datos
+     * @param estante Estante a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateEstante(Estante estante) {
@@ -90,9 +90,9 @@ public class EstanteServiceImp implements IEstanteService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un estante de la base de datos
+     * @param id ID del envase a eliminar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteEstante(Long id) {

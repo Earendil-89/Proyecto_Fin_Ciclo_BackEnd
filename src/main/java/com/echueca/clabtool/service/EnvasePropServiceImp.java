@@ -81,7 +81,7 @@ public class EnvasePropServiceImp implements IEnvasePropService {
      */
     @Override
     public ResponseEntity<?> deleteEnvaseProp(Long id) {
-        // Extraer la propiedad de envases
+        // Extraer EnvaseProp
         Optional<EnvaseProp> testEP = this.envasePropRepository.findById(id);
         if( testEP.isEmpty() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "No se puede borrar, la entrada no existe."));
@@ -93,7 +93,7 @@ public class EnvasePropServiceImp implements IEnvasePropService {
                 return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "No se puede borrar, hay envases activos que requieren este objeto."));
             }
         }
-
+        // Borrar EnvaseProp
         this.envasePropRepository.deleteById(id);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Datos de envase borrados"));
     }

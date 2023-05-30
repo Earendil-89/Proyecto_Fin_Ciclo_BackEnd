@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Objeto que desarrolla los serivicos de Compuesto
+ * Interfaz que implementa los servicios de Compuesto
  * @author Eduardo Chueca Montaner
  */
 public interface ICompuestoService {

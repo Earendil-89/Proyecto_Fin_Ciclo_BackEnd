@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- *
+ * Interfaz que implementa los servicios de Etiqueta
  * @author Eduardo Chueca Montaner
  */
 public interface IEtiquetaService {

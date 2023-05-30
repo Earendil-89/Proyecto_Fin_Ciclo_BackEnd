@@ -31,8 +31,8 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     private EnvaseRepository envaseRepository;
     
     /**
-     *
-     * @return
+     * Busca todos los usos de envases en la base de datos
+     * @return Lista con los usos de envase
      */
     @Override
     public List<UsoEnvase> getUsoEnvase() {
@@ -40,8 +40,8 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
 
     /**
-     *
-     * @return
+     * Busca todos los usos de envase activos 
+     * @return Lista con usos de envase
      */
     @Override 
     public List<UsoEnvase> getActiveUsoEnvase() {
@@ -49,9 +49,9 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Busca un uso de envase por su ID
+     * @param id ID del uso de envase
+     * @return UsoEnvase en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public UsoEnvase getUsoEnvaseById(Long id) {
@@ -59,9 +59,9 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca todos los usos de envase por el id de un usuario
+     * @param id ID del usuario
+     * @return Lista con usos de envase
      */
     @Override
     public List<UsoEnvase> getUsoEnvaseByUserId(Long id) {
@@ -71,9 +71,9 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
 
     /**
-     *
-     * @param nombreUsuario
-     * @return
+     * Busca todos los usos de envase activos por usuario
+     * @param nombreUsuario Nombre del usuario
+     * @return Lista con unosos de envase
      */
     @Override
     public List<UsoEnvase> getActiveUsoEnvaseByNombreUsuario(String nombreUsuario) {
@@ -83,9 +83,9 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
 
     /**
-     *
-     * @param extr
-     * @return
+     * Crea un nuevo uso de envase en la base de datos como una extraccion de envase
+     * @param extr Datos de la extraccion
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveUsoEnvase(EnvaseExtractDTO extr) {
@@ -113,20 +113,23 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
     }
 
     /**
-     *
-     * @param usoEnvase
-     * @return
+     * Actualiza un uso de envase presente en la base de datos
+     * @param usoEnvase Uso de envase a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateUsoEnvase(UsoEnvase usoEnvase) {
-        
+        // Guardar el uso de envase
         this.usoEnvaseRepository.save(usoEnvase);
+        // Buscar la entidad envase de la base de datos
         Optional<Envase> testEnvase = this.envaseRepository.findById(usoEnvase.getEnvase().getId());
         if( testEnvase.isPresent() ) {
             Envase envase = testEnvase.get();
+            // Agotar el envase si es necesario
             if( usoEnvase.isAgotado() ) {
                 envase.setDisponible(false);
                 envase.setCantidad(0.0);
+                // Reducir la cantidad de reactivo en el envase
             } else if( usoEnvase.getCantidadUsada() > 0.0 ) {
                 envase.setCantidad(envase.getCantidad() - usoEnvase.getCantidadUsada() );
             }
@@ -136,9 +139,9 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, message));    }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un uso de envase de la base de datos
+     * @param id ID del uso de envase
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteUsoEnvase(Long id) {

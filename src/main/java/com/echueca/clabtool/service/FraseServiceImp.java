@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Clase que implementa la interfaz IFraseService
  * @author Eduardo Chueca Montaner
  */
 @Service
@@ -20,8 +20,8 @@ public class FraseServiceImp implements IFraseService {
     private FraseRepository fraseRepository;
 
     /**
-     *
-     * @return
+     * Busca todas las frases en la base de datos
+     * @return Lista con las frases
      */
     @Override
     public List<Frase> getFrase() {
@@ -29,9 +29,9 @@ public class FraseServiceImp implements IFraseService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Busca una frase por su ID
+     * @param id ID de la frase
+     * @return Frase en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public Frase getFraseById(Long id) {
@@ -39,9 +39,9 @@ public class FraseServiceImp implements IFraseService {
     }
 
     /**
-     *
-     * @param frase
-     * @return
+     * Inserta una frase en la base de datos
+     * @param frase Frase a insertar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveFrase(Frase frase) {
@@ -56,9 +56,9 @@ public class FraseServiceImp implements IFraseService {
     }
 
     /**
-     *
-     * @param frase
-     * @return
+     * Actualiza una frase en la base de datos
+     * @param frase Frase a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateFrase(Frase frase) {
@@ -73,9 +73,9 @@ public class FraseServiceImp implements IFraseService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina una frase en la base de datos
+     * @param id ID de la frase a eliminar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteFrase(Long id) {

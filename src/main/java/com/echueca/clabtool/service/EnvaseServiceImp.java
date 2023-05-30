@@ -40,8 +40,8 @@ public class EnvaseServiceImp implements IEnvaseService {
     private UsuarioRepository usuarioRepository;
 
     /**
-     *
-     * @return
+     * Devuelve todos los envases almacenados en la base de datos
+     * @return Lista de envases
      */
     @Override
     public List<Envase> getEnvase() {
@@ -49,49 +49,57 @@ public class EnvaseServiceImp implements IEnvaseService {
     }
     
     /**
-     *
-     * @param envase
-     * @return
+     * Devuelve el resultado de una consulta con datos limitados
+     * @param envase Objeto DTO para buscar envase
+     * @return Lista de objetos DTO con datos de envase limitados
      */
     @Override
     public List<EnvaseResponseDTO> getEnvaseAsUser(EnvaseSearchDTO envase) {
          
-        List<Envase> search = new ArrayList<>();
+        List<Envase> search = new ArrayList<>();    // Lista que contiene todos los matches
         boolean searchStarted = false;
+        // Comprobar si se ha pedido una busqueda por compuesto mediante el ID del compuesto
         if( envase.getCompuestoId() > 0L ){
             Optional<Compuesto> tryCompuesto = this.compuestoRepository.findById(envase.getCompuestoId());
             if( tryCompuesto.isPresent() ) {
+                // Añadir todos los envases que contengan dicho compuesto quimico a la lista
                 search = searchForCompuesto(tryCompuesto.get());
                 searchStarted = true;
             } else {
                 return new ArrayList<>();
             }        
         }
-        
+        // Comprobar si se ha enviado un codigo de EnvaseProp para hacer búsqueda
         if( envase.getCodigo() != null && !envase.getCodigo().equals("") ) {
+            // Editar la lista con el nuevo resultado
             search = searchForCodigo(envase.getCodigo(), search, searchStarted);
             searchStarted = true;
         }
-        
+        // Comprobar si se ha pasado una búsqueda por nombre y añadir a l
         if( envase.getNombre() != null && !envase.getNombre().equals("") ) {
             search = searchForNombre(envase.getNombre(), search, searchStarted);
         }
+        // Devolver un arraylist vacio si no hubieron resultados
         if( search == null || search.size() < 1 ) {
             return new ArrayList<>();
         }
-        List<EnvaseResponseDTO> result = new ArrayList<>();
-        List<UsoEnvase> envasesUso = this.usoEnvaseRepository.findByFechaDevolucionNotNull();
+        
+        List<EnvaseResponseDTO> result = new ArrayList<>(); // Lista con los resultados
+        List<UsoEnvase> envasesUso = this.usoEnvaseRepository.findByFechaDevolucionNotNull(); // Lista con todos los envases en uso
+        // Llenar la lista de resultados
         for( Envase e: search ) {
+            // No añadir los que no cumplan el requisito de pureza mínima
             if( e.getPropiedades().getPureza() < envase.getPureza() ) {
                 continue;
             }
+            // Busca si un usuario esta utilizando el envase en dicho momento
             Usuario usuario = null;
             for( UsoEnvase ue: envasesUso ) {
                 if( ue.getEnvase().getId() == e.getId() ) {
                     usuario = ue.getUsuario();
                 }
             }
-            
+            //Crea las respuestas de envase
             EnvaseResponseDTO buffer = new EnvaseResponseDTO(e.getId(),
                 e.getCantidad(),
                 e.getPropiedades(),
@@ -103,9 +111,9 @@ public class EnvaseServiceImp implements IEnvaseService {
     }
 
     /**
-     *
-     * @param envase
-     * @return
+     * Inserta un nuevo envase en la base de datos
+     * @param envase Envase a insertar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveEnvase(Envase envase) {
@@ -115,9 +123,9 @@ public class EnvaseServiceImp implements IEnvaseService {
     }
 
     /**
-     *
-     * @param envase
-     * @return
+     * Actualiza un envase existente en la base de datos
+     * @param envase Envase a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateEnvase(Envase envase) {
@@ -127,9 +135,9 @@ public class EnvaseServiceImp implements IEnvaseService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un envase de la base de datos
+     * @param id ID del envase
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteEnvase(Long id) {
@@ -138,6 +146,7 @@ public class EnvaseServiceImp implements IEnvaseService {
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Envase borrado"));
     }
     
+    // Devuelve una lista de envases que contengan el compuesto enviado
     private List<Envase> searchForCompuesto(Compuesto compuesto) {
         List<EnvaseProp> epCompuesto = this.envasePropRepository.findByCompuesto(compuesto);
         
@@ -160,6 +169,7 @@ public class EnvaseServiceImp implements IEnvaseService {
         return result;
     }
     
+    // Busca todos los envases que coincidan con el codigo enviado
     private List<Envase> searchForCodigo(String codigo, List<Envase> input, boolean exclusiveSearch) {
         
         List<EnvaseProp> epCodigo = this.envasePropRepository.findByCodigoContainsIgnoreCase(codigo);
@@ -195,6 +205,7 @@ public class EnvaseServiceImp implements IEnvaseService {
         return result;
     }
     
+    // Busca todos los envases cuyo EnvaseProp o compuesto contengan el nombre pasado como parametro
     private List<Envase> searchForNombre(String nombre, List<Envase> input, boolean exclusiveSearch) {
         List<EnvaseProp> epSearch = this.envasePropRepository.findByNombreContainsIgnoreCase(nombre);
         List<Compuesto> cSearch = this.compuestoRepository.findByNombreContainsIgnoreCase(nombre);

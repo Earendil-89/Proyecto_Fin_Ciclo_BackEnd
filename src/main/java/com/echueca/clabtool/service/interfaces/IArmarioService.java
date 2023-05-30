@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Objeto que desarrolla los serivicos de Armario
+ * Interfaz que implementa los servicios de Armario
  * @author Eduardo Chueca Montaner
  */
 public interface IArmarioService {

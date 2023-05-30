@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Objeto que desarrolla los serivicos de EnvaseProp
+ * Interfaz que implementa los servicios de EnvaseProp
  * @author Eduardo Chueca Montaner
  */
 public interface IEnvasePropService {

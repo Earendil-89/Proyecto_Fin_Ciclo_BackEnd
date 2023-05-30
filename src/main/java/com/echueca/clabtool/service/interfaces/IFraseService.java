@@ -5,42 +5,42 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- *
+ * Interfaz que implementa los servicios de Frase
  * @author Eduardo Chueca Montaner
  */
 public interface IFraseService {
     
     /**
-     *
-     * @return
+     * Busca todas las frases en la base de datos
+     * @return Lista con todas las frases
      */
     public List<Frase> getFrase();
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca una frase por su ID
+     * @param id ID de la frase a buscar
+     * @return Frase en caso satisfactorio, nulo en caso contrario
      */
     public Frase getFraseById(Long id);
     
     /**
-     *
-     * @param frase
-     * @return
+     * Inserta una frase en la base de datos
+     * @param frase Frase a insertar
+     * @return Mensaje de respuesta
      */
     public ResponseEntity<?> saveFrase(Frase frase);
     
     /**
-     *
-     * @param frase
-     * @return
+     * Actualiza una frase existente en la base de datos
+     * @param frase Frase a actualizar
+     * @return Mensaje de respuesta
      */
     public ResponseEntity<?> updateFrase(Frase frase);
     
     /**
-     *
-     * @param id
-     * @return
+     * Elimina una frase existente en la base de datos
+     * @param id ID de la frase a borrar
+     * @return Mensaje de respuesta
      */
     public ResponseEntity<?> deleteFrase(Long id);
 }

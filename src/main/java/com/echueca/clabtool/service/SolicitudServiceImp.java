@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Clase que implementa la interfaz ISolicitudService
  * @author Eduardo Chueca Montaner
  */
 @Service
@@ -28,8 +28,8 @@ public class SolicitudServiceImp implements ISolicitudService {
     private UsuarioRepository usuarioRepository;
 
     /**
-     *
-     * @return
+     * Busca todas las solicitudes en la base de datos
+     * @return Lista con las solicitudes
      */
     @Override
     public List<Solicitud> getSolicitud() {
@@ -37,9 +37,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Busca una solicitud por su ID
+     * @param id ID de la solicitud a buscar
+     * @return Solicitud en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public Solicitud getSolicitudById(Long id) {
@@ -47,9 +47,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
     
     /**
-     *
-     * @param nombreUsuario
-     * @return
+     * Busca todas las solicitudes realizadas por un usuario
+     * @param nombreUsuario Nombre del usuario que ha reazliado la solicitud
+     * @return Lista con solicitudes
      */
     @Override
     public List<Solicitud> getSolicitudByNombreUsuario(String nombreUsuario) {
@@ -58,8 +58,8 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
     
     /**
-     *
-     * @return
+     * Busca todas las solicitudes activas, o no tramitadas
+     * @return Lista con solicitudes activas
      */
     @Override
     public List<Solicitud> getActiveSolicitud() {
@@ -67,8 +67,8 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @return
+     * Busca todas las solicitudes inactivas, o tramitadas
+     * @return Lista con solicitudes inactivas
      */
     @Override
     public List<Solicitud> getInactiveSolicitud() {
@@ -76,9 +76,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Busca todas las solicitudes realizadas por un usuario
+     * @param id ID del usuario que ha realizado la solicitud
+     * @return Lista con solicitudes
      */
     @Override
     public List<Solicitud> getSolicitudByUsuarioId(Long id) {
@@ -90,9 +90,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
     
     /**
-     *
-     * @param solicitud
-     * @return
+     * Inserta una nueva solicitud en la base de datos
+     * @param solicitud Solicitud a insertar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveSolicitud(Solicitud solicitud) {
@@ -102,9 +102,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @param solicitud
-     * @return
+     * Actualiza una soliciutd existente en la base de datos
+     * @param solicitud Solicitud a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateSolicitud(Solicitud solicitud) {
@@ -114,10 +114,10 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
     
     /**
-     *
-     * @param solicitud
-     * @param nombreUsuario
-     * @return
+     * Procesa una solicitud y cambia su estado de tramitacion
+     * @param solicitud Proceso a insertar
+     * @param nombreUsuario Nombre del usuario que procesa la solicitud
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> processSolicitud(SolicitudProcessDTO solicitud, String nombreUsuario) {
@@ -139,10 +139,10 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @param solicitud
-     * @param nombreUsuario
-     * @return
+     * Crea una nueva solicitud con un usuario
+     * @param solicitud Datos de la solicitud a crear
+     * @param nombreUsuario Nombre del usuario que ha creado la solicitud
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveSolicitudByUsuario(SolicitudCreateDTO solicitud, String nombreUsuario) {
@@ -158,9 +158,9 @@ public class SolicitudServiceImp implements ISolicitudService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina una solicitud de la base de datos
+     * @param id ID de la solicitud a eliminar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteSolicitud(Long id) {

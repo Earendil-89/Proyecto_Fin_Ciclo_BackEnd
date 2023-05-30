@@ -5,42 +5,42 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 /**
- *
+ * Interfaz que implementa los servicios de Pedido
  * @author Eduardo Chueca Montaner
  */
 public interface IPedidoService {
     
     /**
-     *
-     * @return
+     * Busca todos los pedidos de la base de datos
+     * @return Lista con los pedidos
      */
     public List<Pedido> getPedido();
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca un pedido por su numero ID
+     * @param id ID del pedido
+     * @return Pedido en caso satisfactorio, nulo en caso contrario
      */
     public Pedido getPedidoById(Long id);
     
     /**
-     *
-     * @param pedido
+     * Inserta un pedido nuevo en la base de datos
+     * @param pedido Pedido a insertar
      * @return
      */
     public ResponseEntity<?> savePedido(Pedido pedido);
     
     /**
-     *
-     * @param pedido
-     * @return
+     * Actualiza un pedido existente en la base de datos
+     * @param pedido Pedido a actualizar
+     * @return Mensaje de respuesta
      */
     public ResponseEntity<?> updatePedido(Pedido pedido);
     
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un pedido existente en la base de datos
+     * @param id ID del pedido a eliminar
+     * @return Mensaje de respuesta
      */
     public ResponseEntity<?> deletePedido(Long id);
 }

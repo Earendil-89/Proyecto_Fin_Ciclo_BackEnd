@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Clase que implementa la interfaz IPedidoService
  * @author Eduardo Chueca Montaner
  */
 @Service
@@ -20,8 +20,8 @@ public class PedidoServiceImp implements IPedidoService {
     private PedidoRepository pedidoRepository;
     
     /**
-     *
-     * @return
+     * Busca todos los pedidos de la base de datos
+     * @return Lista con los pedidos
      */
     @Override
     public List<Pedido> getPedido() {
@@ -29,9 +29,9 @@ public class PedidoServiceImp implements IPedidoService {
     }
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca un pedido por su numero ID
+     * @param id ID del pedido
+     * @return Pedido en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public Pedido getPedidoById(Long id) {
@@ -39,8 +39,8 @@ public class PedidoServiceImp implements IPedidoService {
     }
 
     /**
-     *
-     * @param pedido
+     * Inserta un pedido nuevo en la base de datos
+     * @param pedido Pedido a insertar
      * @return
      */
     @Override
@@ -51,9 +51,9 @@ public class PedidoServiceImp implements IPedidoService {
     }
 
     /**
-     *
-     * @param pedido
-     * @return
+     * Actualiza un pedido existente en la base de datos
+     * @param pedido Pedido a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updatePedido(Pedido pedido) {
@@ -63,9 +63,9 @@ public class PedidoServiceImp implements IPedidoService {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un pedido existente en la base de datos
+     * @param id ID del pedido a eliminar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deletePedido(Long id) {

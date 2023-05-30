@@ -20,8 +20,8 @@ public class UsuarioServiceImp implements IUsuarioService {
     UsuarioRepository usuarioRepository;
     
     /**
-     *
-     * @return
+     * Busca todos los usuarios de la base de datos
+     * @return Lista con los usuarios
      */
     @Override
     public List<Usuario> getUsuario() {
@@ -29,54 +29,43 @@ public class UsuarioServiceImp implements IUsuarioService {
     }
     
     /**
-     *
-     * @param id
-     * @return
+     * Busca un usuario por su ID
+     * @param id ID del usuario
+     * @return Usuario en caso satisfactorio, nulo en caso contrario
      */
     @Override
     public Usuario getUsuarioById(Long id) { 
         return this.usuarioRepository.findById(id).get();
     }
-
-    /**
-     *
-     * @param nombreUsuario
-     * @return
-     */
-    @Override
-    public String getUsuarioNombreByNombreUsuario(String nombreUsuario) {
-        Usuario query = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
-        String result = "";
-        if( query != null ) {
-            result = query.getNombre();
-        }
-        return result;
-    }
     
     /**
-     *
-     * @param usuario
-     * @return
+     * Inserta un nuevo usuario en la base de datos
+     * @param usuario Usuario a insertar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> saveUsuario(Usuario usuario) {
+        // Buscar un usuario que tenga el email
         Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
         if( userTest != null ) {
-                return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
+            // Abortar la insercion y mandar alerta si el email esta en uso
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
         }
-        
+        // Guardar usuario
         this.usuarioRepository.save(usuario);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Usuario creado."));
     }
     
     /**
-     *
-     * @param usuario
-     * @return
+     * Actualiza un usuario existente en la base de datos
+     * @param usuario Usuario a actualizar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> updateUsuario(Usuario usuario) {
+        // Buscar un usuario por el email
         Usuario userTest = this.usuarioRepository.findByEmail(usuario.getEmail());
+        // Abortar si el email esta en uso por un usuario diferente al que se actualiza
         if( userTest != null && userTest.getId() != usuario.getId() )  {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El email ya esta en uso por otro usuario."));
         }
@@ -86,13 +75,28 @@ public class UsuarioServiceImp implements IUsuarioService {
     }
     
     /**
-     *
-     * @param id
-     * @return
+     * Elimina un usuario de la base de datos
+     * @param id ID del usuario a eliminar
+     * @return Mensaje de respuesta
      */
     @Override
     public ResponseEntity<?> deleteUsuarioById(Long id ){
         this.usuarioRepository.deleteById(id);
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Usuario borrado"));
+    }
+    
+    /**
+     * Devuelve el nombre real de un usuario a partir de su nombre de usuario
+     * @param nombreUsuario Nombre de usuario a buscar
+     * @return Nombre del usuario
+     */
+    @Override
+    public String getUsuarioNombreByNombreUsuario(String nombreUsuario) {
+        Usuario query = this.usuarioRepository.findByNombreUsuario(nombreUsuario);
+        String result = "";
+        if( query != null ) {
+            result = query.getNombre();
+        }
+        return result;
     }
 }
