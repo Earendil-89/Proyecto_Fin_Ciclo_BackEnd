@@ -94,7 +94,7 @@ public class UsoEnvaseServiceImp implements IUsoEnvaseService {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "Error: El envase no existe."));
         }
         
-        List<UsoEnvase> testEnvase = this.usoEnvaseRepository.findByEnvaseAndFechaDevolucionNotNull(envase.get());
+        List<UsoEnvase> testEnvase = this.usoEnvaseRepository.findByEnvaseAndFechaDevolucionIsNull(envase.get());
         if( testEnvase != null && !testEnvase.isEmpty() ) {
             return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "Error: El envase ya está en uso por otro usuario."));
         }
