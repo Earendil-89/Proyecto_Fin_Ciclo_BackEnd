@@ -1,9 +1,13 @@
 package com.echueca.clabtool.service;
 
+import com.echueca.clabtool.DTO.PedidoSendDTO;
 import com.echueca.clabtool.service.interfaces.IPedidoService;
 import com.echueca.clabtool.controller.MessageResponse;
 import com.echueca.clabtool.model.Pedido;
+import com.echueca.clabtool.model.Usuario;
 import com.echueca.clabtool.repository.PedidoRepository;
+import com.echueca.clabtool.repository.UsuarioRepository;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,8 @@ public class PedidoServiceImp implements IPedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     
     /**
      * Busca todos los pedidos de la base de datos
@@ -26,6 +32,23 @@ public class PedidoServiceImp implements IPedidoService {
     @Override
     public List<Pedido> getPedido() {
         return this.pedidoRepository.findAll();
+    }
+
+    /**
+     * Busca todos los pedidos activos (sin fecha de entrega)
+     * @return Lista con los pedidos
+     */
+    @Override
+    public List<Pedido> getActivePedido() {
+        return this.pedidoRepository.findByFechaEntregaIsNull();
+    }
+    
+    /**
+     * Busca todos los pedidos inactivos (con fecha de entrega)
+     * @return Lista con los pedidos
+     */
+    public List<Pedido> getInactivePedido() {
+        return this.pedidoRepository.findByFechaEntregaIsNotNull();
     }
     
     /**
@@ -44,8 +67,17 @@ public class PedidoServiceImp implements IPedidoService {
      * @return
      */
     @Override
-    public ResponseEntity<?> savePedido(Pedido pedido) {
-        this.pedidoRepository.save(pedido);
+    public ResponseEntity<?> savePedido(PedidoSendDTO pedido) {
+        Usuario usuario = this.usuarioRepository.findByNombreUsuario(pedido.getUserName());
+        if( usuario == null ) {
+            return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "Error: El usuario no existe"));
+        }
+        Pedido truePedido = pedido.getPedido();
+        truePedido.setUsuario(usuario);
+        if( truePedido.getFechaPedido() == null ) {
+            truePedido.setFechaPedido(new Date());
+        }
+        this.pedidoRepository.save(truePedido);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Pedido guardado."));
     }
