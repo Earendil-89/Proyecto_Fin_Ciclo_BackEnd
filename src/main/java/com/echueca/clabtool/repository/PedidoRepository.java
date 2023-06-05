@@ -1,6 +1,7 @@
 package com.echueca.clabtool.repository;
 
 import com.echueca.clabtool.model.Pedido;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,4 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     
+    public Pedido findByFactura(String factura);
+
+    public List<Pedido> findByFechaEntregaIsNull();
+    
+    public List<Pedido> findByFechaEntregaIsNotNull();
 }
