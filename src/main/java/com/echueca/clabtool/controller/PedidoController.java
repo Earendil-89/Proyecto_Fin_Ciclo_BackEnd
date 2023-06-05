@@ -1,5 +1,6 @@
 package com.echueca.clabtool.controller;
 
+import com.echueca.clabtool.DTO.PedidoSendDTO;
 import com.echueca.clabtool.model.Pedido;
 import com.echueca.clabtool.repository.PedidoRepository;
 import com.echueca.clabtool.service.interfaces.IPedidoService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -32,13 +34,20 @@ public class PedidoController {
     
     /**
      * Devuelve los pedidos almacenados en la base de datos
+     * @param isClosed Solicita si el pedido esta cerrado o pendiente del cierre
      * @return Lista de pedidos
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.io.IOException
      */
     @GetMapping("/pedido")
-    public List<Pedido> getPedido() throws JsonProcessingException, IOException {
-        return this.pedidoService.getPedido();
+    public List<Pedido> getPedido(@RequestParam(required = false) Boolean isClosed) throws JsonProcessingException, IOException {
+        if( isClosed == null ) {
+            return this.pedidoService.getPedido();
+        }
+        else if( isClosed ) {
+            return this.pedidoService.getInactivePedido();
+        }
+        return this.pedidoService.getActivePedido();
     }
     
     /**
@@ -61,7 +70,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @PostMapping("/pedido")
-    public ResponseEntity<?> savePedido(@RequestBody Pedido pedido) throws JsonProcessingException, IOException {
+    public ResponseEntity<?> savePedido(@RequestBody PedidoSendDTO pedido) throws JsonProcessingException, IOException {
         return this.pedidoService.savePedido(pedido);
     }
     
