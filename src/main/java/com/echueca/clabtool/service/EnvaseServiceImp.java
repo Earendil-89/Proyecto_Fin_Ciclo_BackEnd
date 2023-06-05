@@ -36,8 +36,6 @@ public class EnvaseServiceImp implements IEnvaseService {
     private CompuestoRepository compuestoRepository;
     @Autowired
     private UsoEnvaseRepository usoEnvaseRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     /**
      * Devuelve todos los envases almacenados en la base de datos
@@ -95,7 +93,7 @@ public class EnvaseServiceImp implements IEnvaseService {
             // Busca si un usuario esta utilizando el envase en dicho momento
             Usuario usuario = null;
             for( UsoEnvase ue: envasesUso ) {
-                if( ue.getEnvase().getId() == e.getId() ) {
+                if( ue.getEnvase().getId() == e.getId() && ue.getFechaDevolucion() == null ) {
                     usuario = ue.getUsuario();
                 }
             }
