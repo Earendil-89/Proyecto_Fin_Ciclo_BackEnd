@@ -32,10 +32,16 @@ public interface UsoEnvaseRepository extends JpaRepository<UsoEnvase, Long> {
      */
     public List<UsoEnvase> findByUsuarioAndFechaDevolucionIsNull(Usuario usuario);
     
+        /**
+     * Busca usos de envase por envase finalizados (con fecha de devolucion)
+     * @param envase Usuario que realizo el uso de envase
+     * @return Lista de usos de envase
+     */
+    public List<UsoEnvase> findByEnvaseAndFechaDevolucionIsNull(Envase envase);
     /**
      * Busca usos de envase por envase activos (sin fecha de devolucion)
      * @param envase Envase utilizado
      * @return Lista de usos de envase
      */
-    public List<UsoEnvase> findByEnvaseAndFechaDevolucionNotNull(Envase envase);
+    public List<UsoEnvase> findByEnvaseAndFechaDevolucionIsNotNull(Envase envase);
 }
