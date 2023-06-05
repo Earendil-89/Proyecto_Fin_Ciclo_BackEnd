@@ -61,7 +61,7 @@ public class UsuarioController {
      * @param nombreUsuario Nombre de usuario a buscar
      * @return Usuario si la busqueda fue satisfactoria, nulo en caso contrario
      */
-    @GetMapping("/usuario")
+    @GetMapping("/usuario/nombre")
     @PreAuthorize("hasRole('ADMIN') or hasRole('INSPECTOR') or hasRole('USER')")
     public String getUsuarioNombreByNombreUsuario(@RequestParam(name = "nombreUsuario") String nombreUsuario) {
         return this.usuarioService.getUsuarioNombreByNombreUsuario(nombreUsuario);
