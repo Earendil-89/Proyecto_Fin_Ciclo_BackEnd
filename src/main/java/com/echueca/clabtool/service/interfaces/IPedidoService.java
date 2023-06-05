@@ -1,5 +1,6 @@
 package com.echueca.clabtool.service.interfaces;
 
+import com.echueca.clabtool.DTO.PedidoSendDTO;
 import com.echueca.clabtool.model.Pedido;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,18 @@ public interface IPedidoService {
     public List<Pedido> getPedido();
     
     /**
+     * Busca todos los pedidos activos (sin fecha de entrega)
+     * @return Lista con los pedidos
+     */
+    public List<Pedido> getActivePedido();
+    
+    /**
+     * Busca todos los pedidos inactivos (con fecha de entrega)
+     * @return Lista con los pedidos
+     */
+    public List<Pedido> getInactivePedido();
+    
+    /**
      * Busca un pedido por su numero ID
      * @param id ID del pedido
      * @return Pedido en caso satisfactorio, nulo en caso contrario
@@ -28,7 +41,7 @@ public interface IPedidoService {
      * @param pedido Pedido a insertar
      * @return
      */
-    public ResponseEntity<?> savePedido(Pedido pedido);
+    public ResponseEntity<?> savePedido(PedidoSendDTO pedido);
     
     /**
      * Actualiza un pedido existente en la base de datos
