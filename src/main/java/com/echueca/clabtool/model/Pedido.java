@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,8 +29,10 @@ public class Pedido {
     @Getter @Setter private double importe;
     
     @NotBlank
+    @Temporal(TemporalType.DATE)
     @Getter @Setter private Date fechaPedido;
     
+    @Temporal(TemporalType.DATE)
     @Getter @Setter private Date fechaEntrega;
     
     @NotBlank
