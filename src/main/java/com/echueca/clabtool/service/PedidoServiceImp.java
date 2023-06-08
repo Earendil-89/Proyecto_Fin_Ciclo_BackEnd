@@ -3,12 +3,15 @@ package com.echueca.clabtool.service;
 import com.echueca.clabtool.DTO.PedidoSendDTO;
 import com.echueca.clabtool.service.interfaces.IPedidoService;
 import com.echueca.clabtool.controller.MessageResponse;
+import com.echueca.clabtool.model.Envase;
 import com.echueca.clabtool.model.Pedido;
 import com.echueca.clabtool.model.Usuario;
+import com.echueca.clabtool.repository.EnvaseRepository;
 import com.echueca.clabtool.repository.PedidoRepository;
 import com.echueca.clabtool.repository.UsuarioRepository;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,8 @@ public class PedidoServiceImp implements IPedidoService {
     private PedidoRepository pedidoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private EnvaseRepository envaseRepository;
     
     /**
      * Busca todos los pedidos de la base de datos
@@ -101,6 +106,17 @@ public class PedidoServiceImp implements IPedidoService {
      */
     @Override
     public ResponseEntity<?> deletePedido(Long id) {
+        Optional<Pedido> testPedido = this.pedidoRepository.findById(id);
+        if( testPedido.isEmpty() ) {
+           return ResponseEntity.ok(new MessageResponse(MessageResponse.ALERT, "El pedido no existe")); 
+        }
+        List<Envase> envases = this.envaseRepository.findByPedido(testPedido.get());
+        
+        for(Envase e: envases) {
+            e.setPedido(null);
+            this.envaseRepository.save(e);
+        }
+        
         this.pedidoRepository.deleteById(id);
         
         return ResponseEntity.ok(new MessageResponse(MessageResponse.OK, "Pedido borrado."));

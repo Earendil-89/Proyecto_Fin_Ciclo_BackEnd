@@ -5,6 +5,7 @@ import com.echueca.clabtool.service.interfaces.IEnvasePropService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class EnvasePropController {
      * @return Lista con las propiedades de envases
      */
     @GetMapping("/envaseProp")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public List<EnvaseProp> getEnvaseProp() {
         return this.envasePropService.getEnvaseProp();
     }
@@ -42,6 +44,7 @@ public class EnvasePropController {
      * @return Mensaje de respuesta
      */
     @PostMapping("/envaseProp")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> saveEnvaseProp(@RequestBody EnvaseProp envaseProp) {
         return this.envasePropService.saveEnvaseProp(envaseProp);
     }
@@ -52,6 +55,7 @@ public class EnvasePropController {
      * @return mensaje de respuesta
      */
     @PutMapping("/envaseProp")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updateEnvaseProp(@RequestBody EnvaseProp envaseProp) {
         return this.envasePropService.updateEnvaseProp(envaseProp);
     }
@@ -62,6 +66,7 @@ public class EnvasePropController {
      * @return Mensaje de respuesta
      */
     @DeleteMapping("/envaseProp/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> deleteEnvaseProp(@PathVariable Long id) {
         return this.envasePropService.deleteEnvaseProp(id);
     }

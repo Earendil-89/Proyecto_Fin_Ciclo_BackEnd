@@ -59,4 +59,11 @@
                 <goal>install</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-clean</actionName>
+            <displayName>clean</displayName>
+            <goals>
+                <goal>clean:clean</goal>
+            </goals>
+        </action>
     </actions>

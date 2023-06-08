@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @GetMapping("/pedido")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public List<Pedido> getPedido(@RequestParam(required = false) Boolean isClosed) throws JsonProcessingException, IOException {
         if( isClosed == null ) {
             return this.pedidoService.getPedido();
@@ -58,6 +60,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @GetMapping("/pedido/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public Pedido getPedidoById(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.pedidoService.getPedidoById(id);
     }
@@ -70,6 +73,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @PostMapping("/pedido")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> savePedido(@RequestBody PedidoSendDTO pedido) throws JsonProcessingException, IOException {
         return this.pedidoService.savePedido(pedido);
     }
@@ -82,6 +86,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @PutMapping("/pedido")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updatePedido(@RequestBody Pedido pedido) throws JsonProcessingException, IOException {
         return this.pedidoService.updatePedido(pedido);
     }
@@ -94,6 +99,7 @@ public class PedidoController {
      * @throws java.io.IOException
      */
     @DeleteMapping("/pedido/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> deletePedido(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.pedidoService.deletePedido(id);
     }

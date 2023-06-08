@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class EtiquetaController {
      * @throws IOException
      */
     @GetMapping("/etiqueta")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public List<Etiqueta> getEtiqueta() throws JsonProcessingException, IOException {
         return this.etiquetaService.getEtiqueta();
     }
@@ -49,6 +51,7 @@ public class EtiquetaController {
      * @throws IOException
      */
     @GetMapping("/etiqueta/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public Etiqueta getEtiquetaById(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.etiquetaService.getEtiquetaById(id);
     }
@@ -61,6 +64,7 @@ public class EtiquetaController {
      * @throws IOException
      */
     @PostMapping("/etiqueta")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> saveEtiqueta(@RequestBody Etiqueta etiqueta) throws JsonProcessingException, IOException {
         return this.etiquetaService.saveEtiqueta(etiqueta);
     }
@@ -73,6 +77,7 @@ public class EtiquetaController {
      * @throws IOException
      */
     @PutMapping("/etiqueta")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updateEtiqueta(@RequestBody Etiqueta etiqueta) throws JsonProcessingException, IOException {
         return this.etiquetaService.updateEtiqueta(etiqueta);
     }
@@ -85,6 +90,7 @@ public class EtiquetaController {
      * @throws IOException
      */
     @DeleteMapping("/etiqueta/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> deleteEtiqueta(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.etiquetaService.deleteEtiqueta(id);
     }

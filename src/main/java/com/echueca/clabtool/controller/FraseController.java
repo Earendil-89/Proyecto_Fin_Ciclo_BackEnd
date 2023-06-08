@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,7 @@ public class FraseController {
      * @throws IOException
      */
     @GetMapping("/frase")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public List<Frase> getFrase() throws JsonProcessingException, IOException {
         return this.fraseService.getFrase();
     }
@@ -52,6 +54,7 @@ public class FraseController {
      * @throws IOException
      */
     @GetMapping("/frase/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public Frase getFraseById(@PathVariable Long id) throws JsonProcessingException, IOException {
         return this.fraseService.getFraseById(id);
     }
@@ -64,6 +67,7 @@ public class FraseController {
      * @throws IOException
      */
     @PostMapping("/frase")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> saveFrase(@RequestBody Frase frase) throws JsonProcessingException, IOException {
         this.fraseService.saveFrase(frase);
         
@@ -78,6 +82,7 @@ public class FraseController {
      * @throws IOException
      */
     @PutMapping("/frase")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> updateFrase(@RequestBody Frase frase) throws JsonProcessingException, IOException {
         this.fraseService.updateFrase(frase);
         
@@ -92,6 +97,7 @@ public class FraseController {
      * @throws IOException
      */
     @DeleteMapping("/frase/{id}")
+    @PreAuthorize("hasRole('INSPECTOR')")
     public ResponseEntity<?> deleteFrase(@PathVariable Long id) throws JsonProcessingException, IOException {
         this.fraseService.deleteFrase(id);
         

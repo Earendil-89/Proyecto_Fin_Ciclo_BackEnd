@@ -1,5 +1,6 @@
 package com.echueca.clabtool.model;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,13 +46,13 @@ public class EnvaseProp {
     @JoinTable(	name = "envases_frases", 
         joinColumns = @JoinColumn(name = "envase_id"), 
         inverseJoinColumns = @JoinColumn(name = "frase_id"))
-    @Getter @Setter private Set<Frase> frases;
+    @Getter @Setter private List<Frase> frases;
     
     @ManyToMany
     @JoinTable(	name = "envases_etiquetas", 
         joinColumns = @JoinColumn(name = "envase_id"), 
         inverseJoinColumns = @JoinColumn(name = "etiqueta_id"))
-    @Getter @Setter private Set<Etiqueta> etiquetas;
+    @Getter @Setter private List<Etiqueta> etiquetas;
     @Getter @Setter private String urlFabricante;
     
     @NotBlank
@@ -77,7 +78,7 @@ public class EnvaseProp {
      * @param etiquetas
      * @param urlFabricante
      */
-    public EnvaseProp(long id, String codigo, String nombre, double pureza, double capacidad, Unidad unidades, Compuesto compuesto, Set<Frase> frases, Set<Etiqueta> etiquetas, String urlFabricante) {
+    public EnvaseProp(long id, String codigo, String nombre, double pureza, double capacidad, Unidad unidades, Compuesto compuesto, List<Frase> frases, List<Etiqueta> etiquetas, String urlFabricante) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
